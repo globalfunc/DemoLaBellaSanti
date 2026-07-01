@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Контакти — La Bella Senti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/theme.css"/>
+<style>
+  .ct-hero{
+    padding:160px 0 60px;background:var(--grad-page);position:relative;overflow:hidden;
+  }
+  .ct-hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 700px 400px at 80% 20%, rgba(201,169,106,.18), transparent 60%);
+  }
+  .ct-hero .wrap{position:relative;z-index:2;}
+  .ct-hero h1{font-size:clamp(60px,8vw,128px);line-height:.92;}
+
+  .ct-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:60px;margin-top:50px;
+  }
+  @media(max-width:960px){.ct-grid{grid-template-columns:1fr;}}
+
+  /* form */
+  .form-card{
+    border:1px solid var(--line-strong);padding:48px 44px;
+    background:
+      radial-gradient(ellipse 600px 300px at 50% 0%, rgba(201,169,106,.08), transparent 60%),
+      linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,0)),#0a080c;
+    position:relative;
+  }
+  .form-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad-gold);opacity:.7;}
+  .form-card h3{font-size:32px;margin-bottom:8px;}
+  .form-card .sub{color:var(--ink-mute);margin-bottom:34px;font-size:14px;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;}
+  .form-grid .full{grid-column:1/-1;}
+  .field{position:relative;display:block;}
+  .field label{
+    display:block;font-size:10px;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--ink-dim);margin-bottom:10px;
+  }
+  .field input,.field textarea,.field select{
+    width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+    color:var(--ink);font:inherit;font-size:15px;padding:10px 0 14px;outline:none;
+    transition:border-color .35s;letter-spacing:.02em;
+    font-family:inherit;
+  }
+  .field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%), linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:right 8px center, right 4px center;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:24px;}
+  .field textarea{min-height:120px;resize:vertical;}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);}
+  .form-card .submit-row{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .privacy{color:var(--ink-dim);font-size:11px;letter-spacing:.15em;max-width:36ch;line-height:1.6;}
+  .privacy a{color:var(--gold);text-decoration:none;}
+
+  /* contact list cards */
+  .ct-cards{display:grid;gap:18px;}
+  .cc{
+    display:grid;grid-template-columns:54px 1fr auto;gap:24px;align-items:center;
+    border:1px solid var(--line);padding:24px 26px;background:linear-gradient(160deg,rgba(255,255,255,.02),rgba(0,0,0,0));
+    text-decoration:none;color:var(--ink);transition:border-color .35s, transform .35s;
+  }
+  .cc:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+  .cc .ic{
+    width:44px;height:44px;border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+    font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;
+  }
+  .cc .lbl{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:4px;}
+  .cc .val{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--ink);}
+  .cc .ar{color:var(--gold);font-size:18px;}
+
+  /* hours */
+  .hours{
+    border:1px solid var(--line);padding:26px;margin-top:18px;
+    background:linear-gradient(160deg,rgba(255,255,255,.02),rgba(0,0,0,0));
+  }
+  .hours h4{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);font-family:"Jost",sans-serif;font-weight:400;margin-bottom:18px;}
+  .hours-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-mute);}
+  .hours-row:last-child{border-bottom:0;}
+  .hours-row .d{color:var(--ink);}
+
+  /* map placeholder */
+  .map{
+    margin-top:60px;border:1px solid var(--line-strong);
+    aspect-ratio:21/9;
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(201,169,106,.12), transparent 60%),
+      linear-gradient(180deg,#0e0c12 0%, #08070a 100%);
+  }
+  .map::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(201,169,106,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,169,106,.06) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+  .map::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(8,7,10,.7) 80%);
+  }
+  .map-pin{
+    position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);
+    text-align:center;z-index:2;
+  }
+  .map-pin .dot{
+    width:18px;height:18px;border-radius:50%;
+    background:radial-gradient(circle, #fff3cf, var(--gold));
+    margin:0 auto;
+    box-shadow:0 0 0 6px rgba(201,169,106,.2), 0 0 0 14px rgba(201,169,106,.08), 0 0 30px var(--gold);
+    animation:pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,169,106,.5), 0 0 0 6px rgba(201,169,106,.25), 0 0 30px var(--gold);}100%{box-shadow:0 0 0 18px rgba(201,169,106,0), 0 0 0 36px rgba(201,169,106,0), 0 0 30px var(--gold);}}
+  .map-pin .ad{
+    margin-top:18px;font-family:"Cormorant Garamond",serif;color:var(--ink);font-size:22px;font-style:italic;
+  }
+  .map-pin .ad span{color:var(--gold);}
+  .map-pin .city{color:var(--ink-dim);font-size:11px;letter-spacing:.4em;text-transform:uppercase;margin-top:8px;}
+  .map-pin .open-link{
+    display:inline-block;margin-top:18px;color:var(--gold);font-size:11px;letter-spacing:.3em;
+    text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:4px;
+  }
+  .map-overlay-tl{position:absolute;left:24px;top:24px;color:var(--ink-dim);font-size:10px;letter-spacing:.35em;text-transform:uppercase;z-index:2;}
+  .map-overlay-tr{position:absolute;right:24px;top:24px;color:var(--gold);font-size:10px;letter-spacing:.35em;text-transform:uppercase;z-index:2;font-family:"JetBrains Mono",monospace;}
+  .map-overlay-bl{position:absolute;left:24px;bottom:24px;color:var(--ink-mute);font-size:10px;letter-spacing:.35em;text-transform:uppercase;z-index:2;}
+
+  /* split bottom */
+  .split-cta{
+    margin-top:80px;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  @media(max-width:780px){.split-cta{grid-template-columns:1fr;}}
+  .split-cta > div{padding:50px 40px;display:flex;flex-direction:column;justify-content:space-between;gap:30px;}
+  .split-cta > div + div{border-left:1px solid var(--line);}
+  @media(max-width:780px){.split-cta > div + div{border-left:0;border-top:1px solid var(--line);}}
+  .split-cta h3{font-size:32px;}
+  .split-cta p{font-size:13.5px;line-height:1.7;max-width:48ch;}
+
+  /* form footer note */
+  .toast{
+    position:fixed;left:50%;bottom:32px;transform:translate(-50%,30px);
+    background:var(--grad-gold);color:#0a0908;padding:14px 26px;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    box-shadow:0 14px 50px -10px rgba(201,169,106,.6);
+    opacity:0;pointer-events:none;transition:all .4s;z-index:60;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  /* ============ PRINT ============ */
+  @page{ size: A4 portrait; margin: 0; }
+  @media print{
+    html, body{
+      background:#08070a !important;
+      color:var(--ink);
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      overflow:visible !important;
+    }
+    .nav, footer.lbs, .sticky-book, .toast{ display:none !important; }
+    .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+    *,*::before,*::after{ animation: none !important; transition: none !important; }
+    a{ color: inherit !important; text-decoration: none !important; }
+
+    section.ct-hero,
+    section.section{
+      break-after: page;
+      page-break-after: always;
+      min-height: 297mm;
+      height: auto;
+      padding: 0 !important;
+      display:flex; flex-direction:column; justify-content:center;
+      background:#08070a !important;
+      overflow:visible !important;
+    }
+    section.section:last-of-type{ break-after: auto; page-break-after: auto; }
+
+    .wrap{ padding: 12mm 16mm !important; max-width:none !important; }
+
+    /* HERO */
+    .ct-hero{ min-height: 297mm !important; padding: 16mm 0 !important; justify-content:center !important; }
+    .ct-hero::before{ display:none; }
+    .ct-hero h1{ font-size: 64pt !important; line-height: .95 !important; }
+    .ct-hero p{ font-size: 11pt !important; max-width: 50ch !important; }
+    .ct-hero .eyebrow{ font-size: 8pt !important; }
+
+    /* MAIN: form + cards split across page */
+    .ct-grid{ grid-template-columns: 1.05fr .95fr !important; gap: 10mm !important; margin-top: 6mm !important; }
+    .form-card{ padding: 10mm 9mm !important; break-inside: avoid; page-break-inside: avoid; }
+    .form-card h3{ font-size: 20pt !important; margin-bottom: 4mm !important; }
+    .form-card .sub{ font-size: 9pt !important; margin-bottom: 6mm !important; }
+    .form-grid{ gap: 4mm 5mm !important; }
+    .field label{ font-size: 7.5pt !important; margin-bottom: 2mm !important; letter-spacing: .3em !important; }
+    .field input, .field textarea, .field select{ font-size: 10pt !important; padding: 2mm 0 3mm !important; }
+    .field textarea{ min-height: 18mm !important; }
+    .form-card .submit-row{ margin-top: 6mm !important; }
+    .privacy{ font-size: 8pt !important; max-width: 38ch !important; }
+    .btn{ padding: 3mm 5mm !important; font-size: 8pt !important; }
+
+    .ct-cards{ gap: 3mm !important; }
+    .cc{ grid-template-columns: 10mm 1fr auto !important; gap: 5mm !important; padding: 5mm 6mm !important; break-inside: avoid; }
+    .cc .ic{ width: 10mm !important; height: 10mm !important; font-size: 14pt !important; }
+    .cc .lbl{ font-size: 7.5pt !important; }
+    .cc .val{ font-size: 13pt !important; }
+
+    .hours{ padding: 6mm !important; margin-top: 4mm !important; }
+    .hours h4{ font-size: 8pt !important; margin-bottom: 4mm !important; }
+    .hours-row{ padding: 2mm 0 !important; font-size: 9.5pt !important; }
+
+    /* MAP — keep on its own page */
+    .map{
+      margin-top: 10mm !important;
+      aspect-ratio: 21/9 !important;
+      max-height: 130mm;
+      break-before: page;
+      page-break-before: always;
+    }
+    .map-pin .ad{ font-size: 16pt !important; }
+    .map-pin .city{ font-size: 8pt !important; }
+    .map-pin .open-link{ font-size: 8pt !important; }
+
+    /* SPLIT CTA */
+    .split-cta{ margin-top: 12mm !important; }
+    .split-cta > div{ padding: 10mm 8mm !important; gap: 6mm !important; }
+    .split-cta h3{ font-size: 22pt !important; }
+    .split-cta p{ font-size: 10pt !important; }
+
+    .kicker, .eyebrow{ font-size: 8pt !important; letter-spacing: .35em !important; }
+    h1,h2,h3{ break-after:avoid; page-break-after:avoid; }
+  }
+</style>
+</head>
+<body data-page="contact">
+
+<section class="ct-hero" data-screen-label="Contact Hero">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-i18n-bg="Резервирай преживяване" data-i18n-en="Reserve an experience">Резервирай преживяване</div>
+    <h1 class="display reveal" style="--d:120ms;margin-top:24px;">
+      <span data-i18n-bg="Запиши" data-i18n-en="Reserve">Запиши</span><br/>
+      <span class="italic gold" data-i18n-bg="се." data-i18n-en="your time.">се.</span>
+    </h1>
+    <p class="reveal" style="--d:240ms;font-size:16px;line-height:1.7;max-width:46ch;margin-top:30px;color:var(--ink-mute);" data-i18n-bg="Един клиент в студиото в даден момент. Това значи, че всеки час е запазен — затова те молим да резервираш предварително." data-i18n-en="One client in the studio at a time. Which means every hour is reserved — so please book in advance.">
+      Един клиент в студиото в даден момент. Това значи, че всеки час е запазен — затова те молим да резервираш предварително.
+    </p>
+  </div>
+</section>
+
+<section class="section tight" data-screen-label="Form & Cards">
+  <div class="wrap">
+    <div class="ct-grid">
+
+      <!-- FORM -->
+      <form class="form-card reveal" id="ctForm" onsubmit="return false;">
+        <h3><span class="italic gold" data-i18n-bg="Резервация" data-i18n-en="Booking">Резервация</span></h3>
+        <div class="sub" data-i18n-bg="Попълни долните полета или ни пиши в Instagram." data-i18n-en="Fill the fields below, or message us on Instagram.">Попълни долните полета или ни пиши в Instagram.</div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label data-i18n-bg="Име" data-i18n-en="Name">Име</label>
+            <input type="text" required name="name" autocomplete="name" placeholder="" />
+          </div>
+          <div class="field">
+            <label data-i18n-bg="Телефон" data-i18n-en="Phone">Телефон</label>
+            <input type="tel" required name="phone" autocomplete="tel" placeholder="" />
+          </div>
+          <div class="field full">
+            <label data-i18n-bg="Имейл" data-i18n-en="Email">Имейл</label>
+            <input type="email" name="email" autocomplete="email" placeholder="" />
+          </div>
+          <div class="field">
+            <label data-i18n-bg="Услуга" data-i18n-en="Service">Услуга</label>
+            <select name="service">
+              <option data-i18n-bg="— избери —" data-i18n-en="— select —">— избери —</option>
+              <option data-i18n-bg="Лазерна епилация" data-i18n-en="Laser epilation">Лазерна епилация</option>
+              <option data-i18n-bg="Стягащи терапии" data-i18n-en="Firming therapies">Стягащи терапии</option>
+              <option data-i18n-bg="RF лифтинг" data-i18n-en="RF lifting">RF лифтинг</option>
+              <option data-i18n-bg="Процедури за лице" data-i18n-en="Facial procedures">Процедури за лице</option>
+              <option data-i18n-bg="Фризьорство" data-i18n-en="Hairdressing">Фризьорство</option>
+              <option data-i18n-bg="Боядисване на коса" data-i18n-en="Hair colouring">Боядисване на коса</option>
+              <option data-i18n-bg="Терапии за коса" data-i18n-en="Hair treatments">Терапии за коса</option>
+              <option data-i18n-bg="Маникюр / Педикюр" data-i18n-en="Manicure / Pedicure">Маникюр / Педикюр</option>
+              <option data-i18n-bg="Грим" data-i18n-en="Makeup">Грим</option>
+              <option data-i18n-bg="Невестен ритуал" data-i18n-en="Bridal ritual">Невестен ритуал</option>
+              <option data-i18n-bg="Senti · Or членство" data-i18n-en="Senti · Or membership">Senti · Or членство</option>
+            </select>
+          </div>
+          <div class="field">
+            <label data-i18n-bg="Предпочитан ден" data-i18n-en="Preferred day">Предпочитан ден</label>
+            <input type="date" name="date" />
+          </div>
+          <div class="field full">
+            <label data-i18n-bg="Бележка (по желание)" data-i18n-en="Note (optional)">Бележка (по желание)</label>
+            <textarea name="note" rows="3" placeholder=""></textarea>
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <div class="privacy" data-i18n-bg="С изпращането приемаш да се свържем с теб за потвърждение на резервацията." data-i18n-en="By submitting, you agree we may contact you to confirm the booking.">
+            С изпращането приемаш да се свържем с теб за потвърждение на резервацията.
+          </div>
+          <button type="submit" class="btn gold" data-i18n-bg="Изпрати заявка" data-i18n-en="Send request">Изпрати заявка <span class="arrow">→</span></button>
+        </div>
+      </form>
+
+      <!-- CONTACT CARDS -->
+      <div class="reveal" style="--d:160ms;">
+        <div class="ct-cards">
+          <a class="cc" href="tel:+359896181881">
+            <div class="ic">☏</div>
+            <div>
+              <div class="lbl" data-i18n-bg="Телефон" data-i18n-en="Phone">Телефон</div>
+              <div class="val">+359 89 618 1881</div>
+            </div>
+            <span class="ar">→</span>
+          </a>
+          <a class="cc" target="_blank" href="https://www.instagram.com/la_bella_senti_beauty_studio/">
+            <div class="ic">@</div>
+            <div>
+              <div class="lbl">Instagram</div>
+              <div class="val">@la_bella_senti</div>
+            </div>
+            <span class="ar">↗</span>
+          </a>
+          <a class="cc" target="_blank" href="https://maps.google.com/?q=ул.+Златни+врата+17,+София">
+            <div class="ic">⌖</div>
+            <div>
+              <div class="lbl" data-i18n-bg="Адрес" data-i18n-en="Address">Адрес</div>
+              <div class="val">ул. „Златни врата“ 17</div>
+            </div>
+            <span class="ar">↗</span>
+          </a>
+          <a class="cc" href="mailto:hello@labellasenti.bg">
+            <div class="ic">✉</div>
+            <div>
+              <div class="lbl" data-i18n-bg="Имейл" data-i18n-en="Email">Имейл</div>
+              <div class="val">hello@labellasenti.bg</div>
+            </div>
+            <span class="ar">→</span>
+          </a>
+        </div>
+
+        <div class="hours">
+          <h4 data-i18n-bg="Работно време" data-i18n-en="Opening hours">Работно време</h4>
+          <div class="hours-row"><span class="d" data-i18n-bg="Понеделник — Петък" data-i18n-en="Monday — Friday">Понеделник — Петък</span><span>10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="d" data-i18n-bg="Събота" data-i18n-en="Saturday">Събота</span><span>10:00 — 18:00</span></div>
+          <div class="hours-row"><span class="d" data-i18n-bg="Неделя" data-i18n-en="Sunday">Неделя</span><span data-i18n-bg="По уговорка" data-i18n-en="By appointment">По уговорка</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map reveal" id="map">
+      <div class="map-overlay-tl" data-i18n-bg="Локация · Стрелбище" data-i18n-en="Location · Strelbishte">Локация · Стрелбище</div>
+      <div class="map-overlay-tr">42.665 · N · 23.295 · E</div>
+      <div class="map-overlay-bl" data-i18n-bg="Безплатно паркиране пред студиото" data-i18n-en="Free parking in front of the studio">Безплатно паркиране пред студиото</div>
+      <div class="map-pin">
+        <div class="dot"></div>
+        <div class="ad" data-i18n-bg="ул. „Златни врата“ <span>17</span>" data-i18n-en="ul. Zlatni Vrata <span>17</span>">ул. „Златни врата“ <span>17</span></div>
+        <div class="city">София · ж.к. Стрелбище</div>
+        <a class="open-link" target="_blank" href="https://maps.google.com/?q=ул.+Златни+врата+17,+София" data-i18n-bg="Отвори в Google Maps ↗" data-i18n-en="Open in Google Maps ↗">Отвори в Google Maps ↗</a>
+      </div>
+    </div>
+
+    <!-- SPLIT CTA -->
+    <div class="split-cta">
+      <div>
+        <div>
+          <div class="kicker" style="margin-bottom:14px;" data-i18n-bg="За бърза резервация" data-i18n-en="For a fast booking">За бърза резервация</div>
+          <h3 class="display"><span class="italic gold" data-i18n-bg="Пиши" data-i18n-en="Message">Пиши</span><span data-i18n-bg=" ни в Instagram." data-i18n-en=" us on Instagram.">ни в Instagram.</span></h3>
+          <p data-i18n-bg="Отговаряме до един час между 10:00 и 20:00. Виж и последните преживявания от студиото — каре по каре." data-i18n-en="We reply within the hour between 10:00 and 20:00. You can also browse the most recent moments from the studio — frame by frame.">
+            Отговаряме до един час между 10:00 и 20:00. Виж и последните преживявания от студиото — каре по каре.
+          </p>
+        </div>
+        <a target="_blank" href="https://www.instagram.com/la_bella_senti_beauty_studio/" class="btn ghost" style="align-self:flex-start;" data-i18n-bg="@la_bella_senti" data-i18n-en="@la_bella_senti">@la_bella_senti <span class="arrow">→</span></a>
+      </div>
+      <div>
+        <div>
+          <div class="kicker" style="margin-bottom:14px;" data-i18n-bg="Подаръчна карта" data-i18n-en="Gift card">Подаръчна карта</div>
+          <h3 class="display"><span data-i18n-bg="Подари" data-i18n-en="Gift">Подари</span> <span class="italic gold" data-i18n-bg="ритуал." data-i18n-en="a ritual.">ритуал.</span></h3>
+          <p data-i18n-bg="Луксозна подаръчна карта в собствена кутия. Поръчай по телефон или Instagram — изпращаме в София до 24 часа." data-i18n-en="A luxury gift card in its own keepsake box. Order by phone or Instagram — we deliver within Sofia inside 24 hours.">
+            Луксозна подаръчна карта в собствена кутия. Поръчай по телефон или Instagram — изпращаме в София до 24 часа.
+          </p>
+        </div>
+        <a href="tel:+359896181881" class="btn gold" style="align-self:flex-start;" data-i18n-bg="Поръчай карта" data-i18n-en="Order a card">Поръчай карта <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" data-i18n-bg="Заявката е изпратена. Свързваме се до 1 час." data-i18n-en="Request sent. We'll be in touch within the hour.">
+  Заявката е изпратена. Свързваме се до 1 час.
+</div>
+
+<script>
+(function(){
+  const form = document.getElementById("ctForm");
+  const toast = document.getElementById("toast");
+  form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"), 3500);
+    form.reset();
+  });
+})();
+</script>
+<script src="assets/site.js"></script>
+<script>
+  (function(){
+    const trigger = () => setTimeout(() => window.print(), 500);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(trigger);
+    } else {
+      window.addEventListener('load', trigger);
+    }
+  })();
+</script>
+</body>
+</html>

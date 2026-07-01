@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Услуги — La Bella Senti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/theme.css"/>
+<style>
+  .sv-hero{
+    padding:170px 0 80px;position:relative;overflow:hidden;
+    background:var(--grad-page);
+  }
+  .sv-hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 600px 400px at 80% 30%, rgba(201,169,106,.16), transparent 60%),
+      radial-gradient(ellipse 400px 300px at 10% 80%, rgba(201,169,106,.08), transparent 60%);
+  }
+  .sv-hero .wrap{position:relative;z-index:2;}
+  .sv-title{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:end;margin-bottom:60px;}
+  @media(max-width:960px){.sv-title{grid-template-columns:1fr;}}
+  .sv-title h1{font-size:clamp(64px,9vw,140px);line-height:.92;}
+
+  /* Filter bar */
+  .filterbar{
+    display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+    padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    position:sticky;top:74px;z-index:30;
+    background:rgba(245,236,221,.88);
+    backdrop-filter:blur(14px) saturate(120%);
+  }
+  .filterbar .chip{
+    background:transparent;color:var(--ink-mute);border:1px solid var(--line);
+    padding:8px 16px;border-radius:999px;font:inherit;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;cursor:pointer;transition:all .3s;
+  }
+  .filterbar .chip:hover{color:var(--ink);border-color:var(--line-strong);}
+  .filterbar .chip.on{background:var(--gold);color:#FFF8EA;border-color:var(--gold);}
+  .filterbar .search{
+    margin-left:auto;display:flex;align-items:center;gap:10px;
+    border:1px solid var(--line);padding:6px 14px;border-radius:999px;
+    background:rgba(255,255,255,.45);
+  }
+  .filterbar .search input{
+    background:transparent;border:0;outline:0;color:var(--ink);font:inherit;font-size:13px;
+    min-width:180px;padding:6px 0;letter-spacing:.04em;
+  }
+  .filterbar .search input::placeholder{color:var(--ink-dim);}
+  .filterbar .search .ic{color:var(--gold);font-size:14px;}
+
+  /* Category groups */
+  .cat-group{padding:80px 0 40px;position:relative;}
+  .cat-group + .cat-group{border-top:1px solid var(--line);}
+  .cat-group.hide{display:none;}
+  .cat-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:end;
+    padding-bottom:30px;margin-bottom:36px;border-bottom:1px solid var(--line);
+  }
+  .cat-head .num{
+    font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-size:64px;line-height:.8;
+  }
+  .cat-head h2{font-size:clamp(36px,4vw,56px);margin:0;}
+  .cat-head .lead{max-width:42ch;color:var(--ink-mute);font-size:13.5px;line-height:1.7;text-align:right;}
+  @media(max-width:780px){
+    .cat-head{grid-template-columns:auto 1fr;}
+    .cat-head .lead{display:none;}
+  }
+
+  /* Service list */
+  .sv-list{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);}
+  @media(max-width:780px){.sv-list{grid-template-columns:1fr;}}
+  .sv-row{
+    display:grid;grid-template-columns:1fr auto;gap:22px;align-items:start;
+    padding:24px 28px;border-bottom:1px solid var(--line);
+    transition:background .3s;cursor:default;position:relative;
+  }
+  .sv-list .sv-row:nth-child(even){border-left:1px solid var(--line);}
+  @media(max-width:780px){.sv-list .sv-row:nth-child(even){border-left:0;}}
+  .sv-row:hover{background:rgba(201,169,106,.04);}
+  .sv-row.hide{display:none;}
+  .sv-row::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);
+    transform:scaleY(0);transform-origin:top;transition:transform .35s ease;
+  }
+  .sv-row:hover::before{transform:scaleY(1);}
+  .sv-row .n{font-family:"Cormorant Garamond",serif;color:var(--ink);font-size:22px;line-height:1.2;margin-bottom:6px;}
+  .sv-row .d{color:var(--ink-mute);font-size:12.5px;line-height:1.55;letter-spacing:.01em;}
+  .sv-row .price{text-align:right;}
+  .sv-row .eur{font-family:"Cormorant Garamond",serif;color:var(--gold);font-size:24px;font-style:italic;line-height:1;}
+  .sv-row .bgn{color:var(--ink-dim);font-size:10px;letter-spacing:.25em;text-transform:uppercase;margin-top:4px;}
+  .sv-row .tag{
+    display:inline-block;font-size:9px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);border:1px solid var(--gold);padding:2px 8px;margin-top:4px;
+  }
+
+  /* CTA bottom */
+  .sv-cta{
+    margin-top:50px;padding:50px;text-align:center;
+    border:1px solid var(--line-strong);
+    background:radial-gradient(ellipse at 50% 0%, rgba(201,169,106,.10), transparent 60%);
+  }
+  .sv-cta h3{font-size:34px;margin-bottom:14px;}
+  .sv-cta p{margin:0 auto 26px;max-width:50ch;}
+
+  /* Pricing strip */
+  .pricing-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--line);margin-top:40px;
+    background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.15));
+  }
+  @media(max-width:780px){.pricing-strip{grid-template-columns:repeat(2,1fr);}}
+  .ps-cell{padding:24px 22px;border-right:1px solid var(--line);}
+  .ps-cell:last-child{border-right:0;}
+  .ps-cell .lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px;}
+  .ps-cell .val{font-family:"Cormorant Garamond",serif;color:var(--gold);font-style:italic;font-size:28px;line-height:1;}
+  .ps-cell .sub{color:var(--ink-mute);font-size:12px;margin-top:6px;}
+
+  .currency-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;}
+  .currency-toggle button{
+    background:transparent;color:var(--ink-mute);border:0;font:inherit;
+    padding:6px 14px;font-size:10px;letter-spacing:.22em;cursor:pointer;text-transform:uppercase;
+  }
+  .currency-toggle button.on{background:var(--gold);color:#FFF8EA;}
+  .empty{
+    text-align:center;padding:80px 24px;border:1px dashed var(--line);
+    color:var(--ink-dim);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:24px;
+  }
+</style>
+</head>
+<body data-page="services">
+
+<!-- HERO -->
+<section class="sv-hero" data-screen-label="Services Hero">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-i18n-bg="Каталог · Цени · EUR / BGN" data-i18n-en="Catalog · Prices · EUR / BGN">Каталог · Цени · EUR / BGN</div>
+    <div class="sv-title" style="margin-top:28px;">
+      <h1 class="display reveal" style="--d:120ms;">
+        <span data-i18n-bg="Услугите" data-i18n-en="The services">Услугите</span><br/>
+        <span class="italic gold" data-i18n-bg="на студиото." data-i18n-en="of the studio.">на студиото.</span>
+      </h1>
+      <p class="reveal" style="--d:240ms;font-size:15px;line-height:1.7;color:var(--ink-mute);max-width:42ch;text-align:right;justify-self:end;" data-i18n-bg="Девет ритуала, повече от шестдесет авторски процедури. Всяка цена е окончателна — без скрити такси, без изненади." data-i18n-en="Nine rituals, more than sixty signature procedures. Every price is final — no hidden fees, no surprises.">
+        Девет ритуала, повече от шестдесет авторски процедури. Всяка цена е окончателна — без скрити такси, без изненади.
+      </p>
+    </div>
+
+    <!-- pricing strip -->
+    <div class="pricing-strip reveal" style="--d:300ms;">
+      <div class="ps-cell"><div class="lbl" data-i18n-bg="Основна валута" data-i18n-en="Primary">Основна валута</div><div class="val">EUR</div><div class="sub" data-i18n-bg="официална от 2026" data-i18n-en="official since 2026">официална от 2026</div></div>
+      <div class="ps-cell"><div class="lbl" data-i18n-bg="Втора валута" data-i18n-en="Secondary">Втора валута</div><div class="val">BGN</div><div class="sub" data-i18n-bg="курс 1 EUR ≈ 1.95583" data-i18n-en="rate 1 EUR ≈ 1.95583">курс 1 EUR ≈ 1.95583</div></div>
+      <div class="ps-cell"><div class="lbl" data-i18n-bg="Първа консултация" data-i18n-en="First consultation">Първа консултация</div><div class="val">€ 0</div><div class="sub" data-i18n-bg="със запис" data-i18n-en="with appointment">със запис</div></div>
+      <div class="ps-cell">
+        <div class="lbl" data-i18n-bg="Покажи цени в" data-i18n-en="Show prices in">Покажи цени в</div>
+        <div class="currency-toggle" id="cur" style="margin-top:8px;">
+          <button data-cur="EUR" class="on">EUR</button>
+          <button data-cur="BGN">BGN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER + LIST -->
+<section style="position:relative;">
+  <div class="wrap">
+    <div class="filterbar" id="filterbar">
+      <button class="chip on" data-cat="all" data-i18n-bg="Всички" data-i18n-en="All">Всички</button>
+      <button class="chip" data-cat="laser" data-i18n-bg="Лазерна епилация" data-i18n-en="Laser">Лазерна епилация</button>
+      <button class="chip" data-cat="firming" data-i18n-bg="Стягащи" data-i18n-en="Firming">Стягащи</button>
+      <button class="chip" data-cat="rf" data-i18n-bg="RF лифтинг" data-i18n-en="RF Lifting">RF лифтинг</button>
+      <button class="chip" data-cat="facial" data-i18n-bg="Лице" data-i18n-en="Face">Лице</button>
+      <button class="chip" data-cat="hairdress" data-i18n-bg="Фризьорство" data-i18n-en="Hair">Фризьорство</button>
+      <button class="chip" data-cat="color" data-i18n-bg="Цвят" data-i18n-en="Colour">Цвят</button>
+      <button class="chip" data-cat="haircare" data-i18n-bg="Терапии" data-i18n-en="Treatments">Терапии</button>
+      <button class="chip" data-cat="mani" data-i18n-bg="Маникюр" data-i18n-en="Manicure">Маникюр</button>
+      <button class="chip" data-cat="makeup" data-i18n-bg="Грим" data-i18n-en="Makeup">Грим</button>
+      <label class="search">
+        <span class="ic">⌕</span>
+        <input id="searchIn" type="search" placeholder="Търси услуга…" data-ph-bg="Търси услуга…" data-ph-en="Search service…"/>
+      </label>
+    </div>
+
+    <div id="empty" class="empty" style="display:none;" data-i18n-bg="Нищо не съвпадна. Опитай друга дума." data-i18n-en="Nothing matched. Try another word.">
+      Нищо не съвпадна. Опитай друга дума.
+    </div>
+
+    <!-- ====== I. LASER ====== -->
+    <div class="cat-group" data-group="laser" id="laser">
+      <div class="cat-head">
+        <div class="num">I</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Сигнатурен ритуал" data-i18n-en="Signature ritual">Сигнатурен ритуал</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Лазерна" data-i18n-en="Laser">Лазерна</span> <span class="italic gold" data-i18n-bg="епилация" data-i18n-en="epilation">епилация</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Диоден лазер с тройна дължина на вълната. Безопасен за всеки фототип, ефективен за всеки тон кожа." data-i18n-en="Triple-wavelength diode laser. Safe for any phototype, effective on any skin tone.">Диоден лазер с тройна дължина на вълната. Безопасен за всеки фототип, ефективен за всеки тон кожа.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="laser" data-name="горна устна upper lip"><div><div class="n" data-i18n-bg="Горна устна" data-i18n-en="Upper lip">Горна устна</div><div class="d" data-i18n-bg="Сесия · 10 мин" data-i18n-en="Session · 10 min">Сесия · 10 мин</div></div><div class="price"><div class="eur" data-eur="12">€ 12</div><div class="bgn">23 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="брадичка chin"><div><div class="n" data-i18n-bg="Брадичка" data-i18n-en="Chin">Брадичка</div><div class="d" data-i18n-bg="Сесия · 10 мин" data-i18n-en="Session · 10 min">Сесия · 10 мин</div></div><div class="price"><div class="eur" data-eur="15">€ 15</div><div class="bgn">29 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="подмишници underarm armpits"><div><div class="n" data-i18n-bg="Подмишници" data-i18n-en="Underarms">Подмишници</div><div class="d" data-i18n-bg="Сесия · 15 мин" data-i18n-en="Session · 15 min">Сесия · 15 мин</div></div><div class="price"><div class="eur" data-eur="22">€ 22</div><div class="bgn">43 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="бикини bikini classic"><div><div class="n" data-i18n-bg="Бикини · класическо" data-i18n-en="Bikini · classic">Бикини · класическо</div><div class="d" data-i18n-bg="Сесия · 20 мин" data-i18n-en="Session · 20 min">Сесия · 20 мин</div></div><div class="price"><div class="eur" data-eur="34">€ 34</div><div class="bgn">66 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="бикини brazilian dълбоко"><div><div class="n" data-i18n-bg="Бикини · бразилско" data-i18n-en="Bikini · brazilian">Бикини · бразилско</div><div class="d" data-i18n-bg="Сесия · 25 мин" data-i18n-en="Session · 25 min">Сесия · 25 мин</div></div><div class="price"><div class="eur" data-eur="48">€ 48</div><div class="bgn">94 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="ръце arms"><div><div class="n" data-i18n-bg="Ръце · цели" data-i18n-en="Arms · full">Ръце · цели</div><div class="d" data-i18n-bg="Сесия · 30 мин" data-i18n-en="Session · 30 min">Сесия · 30 мин</div></div><div class="price"><div class="eur" data-eur="55">€ 55</div><div class="bgn">108 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="крака legs full"><div><div class="n" data-i18n-bg="Крака · цели" data-i18n-en="Legs · full">Крака · цели</div><div class="d" data-i18n-bg="Сесия · 50 мин" data-i18n-en="Session · 50 min">Сесия · 50 мин</div></div><div class="price"><div class="eur" data-eur="98">€ 98</div><div class="bgn">192 BGN</div></div></div>
+        <div class="sv-row" data-cat="laser" data-name="курс 6 пакет"><div><div class="n" data-i18n-bg="Курс · 6 сесии" data-i18n-en="Course · 6 sessions">Курс · 6 сесии</div><div class="d" data-i18n-bg="За избрана зона · −20%" data-i18n-en="Chosen zone · −20%">За избрана зона · −20%</div><span class="tag" data-i18n-bg="препоръчано" data-i18n-en="recommended">препоръчано</span></div><div class="price"><div class="eur" data-eur="240">от € 240</div><div class="bgn">469 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== II. FIRMING ====== -->
+    <div class="cat-group" data-group="firming" id="firming">
+      <div class="cat-head">
+        <div class="num">II</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Скулптурираща грижа" data-i18n-en="Sculpting care">Скулптурираща грижа</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Стягащи" data-i18n-en="Firming">Стягащи</span> <span class="italic gold" data-i18n-bg="терапии" data-i18n-en="therapies">терапии</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Кавитация, прес-терапия и кислородна грижа за тяло — за стегнат силует и видим тонус." data-i18n-en="Cavitation, pressotherapy, oxygen body care — for a sculpted silhouette and visible tone.">Кавитация, прес-терапия и кислородна грижа за тяло — за стегнат силует и видим тонус.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="firming" data-name="кавитация cavitation"><div><div class="n" data-i18n-bg="Ултразвукова кавитация" data-i18n-en="Ultrasonic cavitation">Ултразвукова кавитация</div><div class="d" data-i18n-bg="Една зона · 40 мин" data-i18n-en="One zone · 40 min">Една зона · 40 мин</div></div><div class="price"><div class="eur" data-eur="45">€ 45</div><div class="bgn">88 BGN</div></div></div>
+        <div class="sv-row" data-cat="firming" data-name="прес-терапия pressotherapy"><div><div class="n" data-i18n-bg="Прес-терапия" data-i18n-en="Pressotherapy">Прес-терапия</div><div class="d" data-i18n-bg="Цяло тяло · 30 мин" data-i18n-en="Full body · 30 min">Цяло тяло · 30 мин</div></div><div class="price"><div class="eur" data-eur="32">€ 32</div><div class="bgn">63 BGN</div></div></div>
+        <div class="sv-row" data-cat="firming" data-name="антицелулит anti cellulite"><div><div class="n" data-i18n-bg="Антицелулитен масаж" data-i18n-en="Anti-cellulite massage">Антицелулитен масаж</div><div class="d" data-i18n-bg="Проблемна зона · 50 мин" data-i18n-en="Problem zone · 50 min">Проблемна зона · 50 мин</div></div><div class="price"><div class="eur" data-eur="40">€ 40</div><div class="bgn">78 BGN</div></div></div>
+        <div class="sv-row" data-cat="firming" data-name="vacuum вакуум roller"><div><div class="n" data-i18n-bg="Вакуум-роло терапия" data-i18n-en="Vacuum-roller therapy">Вакуум-роло терапия</div><div class="d" data-i18n-bg="Дренаж · 45 мин" data-i18n-en="Drainage · 45 min">Дренаж · 45 мин</div></div><div class="price"><div class="eur" data-eur="50">€ 50</div><div class="bgn">98 BGN</div></div></div>
+        <div class="sv-row" data-cat="firming" data-name="курс body shape"><div><div class="n" data-i18n-bg="Body shape · курс" data-i18n-en="Body shape · course">Body shape · курс</div><div class="d" data-i18n-bg="8 сесии · –25%" data-i18n-en="8 sessions · −25%">8 сесии · –25%</div><span class="tag" data-i18n-bg="най-търсено" data-i18n-en="bestseller">най-търсено</span></div><div class="price"><div class="eur" data-eur="290">от € 290</div><div class="bgn">567 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== III. RF ====== -->
+    <div class="cat-group" data-group="rf" id="rf">
+      <div class="cat-head">
+        <div class="num">III</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Невидим лифт" data-i18n-en="Invisible lift">Невидим лифт</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Радиочестотен" data-i18n-en="Radiofrequency">Радиочестотен</span> <span class="italic gold" data-i18n-bg="лифтинг" data-i18n-en="lifting">лифтинг</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Деликатно затопляне в дълбочина — за стимулирано колагенообразуване и видим лифт без интервенция." data-i18n-en="A gentle deep warming — to stimulate collagen and lift visibly, without intervention.">Деликатно затопляне в дълбочина — за стимулирано колагенообразуване и видим лифт без интервенция.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="rf" data-name="rf лице face"><div><div class="n" data-i18n-bg="RF · лице" data-i18n-en="RF · face">RF · лице</div><div class="d" data-i18n-bg="60 мин · видим резултат" data-i18n-en="60 min · visible result">60 мин · видим резултат</div></div><div class="price"><div class="eur" data-eur="65">€ 65</div><div class="bgn">127 BGN</div></div></div>
+        <div class="sv-row" data-cat="rf" data-name="rf шия очи neck eyes"><div><div class="n" data-i18n-bg="RF · околоочен контур" data-i18n-en="RF · eye contour">RF · околоочен контур</div><div class="d" data-i18n-bg="30 мин" data-i18n-en="30 min">30 мин</div></div><div class="price"><div class="eur" data-eur="45">€ 45</div><div class="bgn">88 BGN</div></div></div>
+        <div class="sv-row" data-cat="rf" data-name="rf шия деколте neck"><div><div class="n" data-i18n-bg="RF · шия и деколте" data-i18n-en="RF · neck & décolleté">RF · шия и деколте</div><div class="d" data-i18n-bg="45 мин" data-i18n-en="45 min">45 мин</div></div><div class="price"><div class="eur" data-eur="55">€ 55</div><div class="bgn">108 BGN</div></div></div>
+        <div class="sv-row" data-cat="rf" data-name="rf тяло body"><div><div class="n" data-i18n-bg="RF · тяло (зона)" data-i18n-en="RF · body (zone)">RF · тяло (зона)</div><div class="d" data-i18n-bg="50 мин" data-i18n-en="50 min">50 мин</div></div><div class="price"><div class="eur" data-eur="75">€ 75</div><div class="bgn">147 BGN</div></div></div>
+        <div class="sv-row" data-cat="rf" data-name="rf курс лифт"><div><div class="n" data-i18n-bg="RF lift · курс" data-i18n-en="RF lift · course">RF lift · курс</div><div class="d" data-i18n-bg="4 сесии · –15%" data-i18n-en="4 sessions · −15%">4 сесии · –15%</div><span class="tag" data-i18n-bg="препоръчано" data-i18n-en="recommended">препоръчано</span></div><div class="price"><div class="eur" data-eur="220">от € 220</div><div class="bgn">430 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== IV. FACIAL ====== -->
+    <div class="cat-group" data-group="facial" id="facial">
+      <div class="cat-head">
+        <div class="num">IV</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Авторска грижа за лице" data-i18n-en="Signature face care">Авторска грижа за лице</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Процедури" data-i18n-en="Facial">Процедури</span> <span class="italic gold" data-i18n-bg="за лице" data-i18n-en="procedures">за лице</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Дълбоко почистване, хидро-фейшъл, химически пилинги и anti-age протоколи с медицински-грейд продукти." data-i18n-en="Deep cleansing, hydro-facial, chemical peels and anti-age protocols with medical-grade products.">Дълбоко почистване, хидро-фейшъл, химически пилинги и anti-age протоколи с медицински-грейд продукти.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="facial" data-name="дълбоко почистване deep clean"><div><div class="n" data-i18n-bg="Дълбоко почистване" data-i18n-en="Deep cleansing">Дълбоко почистване</div><div class="d" data-i18n-bg="60 мин · класика" data-i18n-en="60 min · classic">60 мин · класика</div></div><div class="price"><div class="eur" data-eur="50">€ 50</div><div class="bgn">98 BGN</div></div></div>
+        <div class="sv-row" data-cat="facial" data-name="хидро hydro facial"><div><div class="n" data-i18n-bg="Хидро-фейшъл" data-i18n-en="Hydro-facial">Хидро-фейшъл</div><div class="d" data-i18n-bg="75 мин · сияние" data-i18n-en="75 min · glow">75 мин · сияние</div></div><div class="price"><div class="eur" data-eur="80">€ 80</div><div class="bgn">156 BGN</div></div></div>
+        <div class="sv-row" data-cat="facial" data-name="хим пилинг peel"><div><div class="n" data-i18n-bg="Химически пилинг" data-i18n-en="Chemical peel">Химически пилинг</div><div class="d" data-i18n-bg="40 мин · повърхностен" data-i18n-en="40 min · superficial">40 мин · повърхностен</div></div><div class="price"><div class="eur" data-eur="70">€ 70</div><div class="bgn">137 BGN</div></div></div>
+        <div class="sv-row" data-cat="facial" data-name="anti-age premium"><div><div class="n" data-i18n-bg="Anti-age премиум" data-i18n-en="Anti-age premium">Anti-age премиум</div><div class="d" data-i18n-bg="90 мин · сигнатура" data-i18n-en="90 min · signature">90 мин · сигнатура</div><span class="tag" data-i18n-bg="сигнатура" data-i18n-en="signature">сигнатура</span></div><div class="price"><div class="eur" data-eur="120">€ 120</div><div class="bgn">235 BGN</div></div></div>
+        <div class="sv-row" data-cat="facial" data-name="вежди brows shape"><div><div class="n" data-i18n-bg="Оформяне на вежди" data-i18n-en="Brow shaping">Оформяне на вежди</div><div class="d" data-i18n-bg="20 мин · с восък/конец" data-i18n-en="20 min · wax / thread">20 мин · с восък/конец</div></div><div class="price"><div class="eur" data-eur="14">€ 14</div><div class="bgn">27 BGN</div></div></div>
+        <div class="sv-row" data-cat="facial" data-name="ламиниране вежди brow"><div><div class="n" data-i18n-bg="Ламиниране на вежди" data-i18n-en="Brow lamination">Ламиниране на вежди</div><div class="d" data-i18n-bg="45 мин · с боядисване" data-i18n-en="45 min · with tint">45 мин · с боядисване</div></div><div class="price"><div class="eur" data-eur="35">€ 35</div><div class="bgn">68 BGN</div></div></div>
+        <div class="sv-row" data-cat="facial" data-name="мигли lash lift"><div><div class="n" data-i18n-bg="Lash lift" data-i18n-en="Lash lift">Lash lift</div><div class="d" data-i18n-bg="60 мин · ефект 6 седмици" data-i18n-en="60 min · 6-week effect">60 мин · ефект 6 седмици</div></div><div class="price"><div class="eur" data-eur="42">€ 42</div><div class="bgn">82 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== V. HAIRDRESS ====== -->
+    <div class="cat-group" data-group="hairdress" id="hairdress">
+      <div class="cat-head">
+        <div class="num">V</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Авторски почерк" data-i18n-en="Signature touch">Авторски почерк</span></div>
+          <h2 class="display" style="margin-top:14px;"><span class="italic gold" data-i18n-bg="Фризьорство" data-i18n-en="Hairdressing">Фризьорство</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Подстригване, оформяне и официални прически, изградени около формата на лицето." data-i18n-en="Cuts, styling and event hair, designed around the shape of your face.">Подстригване, оформяне и официални прически, изградени около формата на лицето.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="hairdress" data-name="подстригване women cut"><div><div class="n" data-i18n-bg="Дамско подстригване" data-i18n-en="Women's cut">Дамско подстригване</div><div class="d" data-i18n-bg="С консултация · от 45 мин" data-i18n-en="With consult · 45 min+">С консултация · от 45 мин</div></div><div class="price"><div class="eur" data-eur="28">€ 28</div><div class="bgn">55 BGN</div></div></div>
+        <div class="sv-row" data-cat="hairdress" data-name="мъжко подстригване men cut"><div><div class="n" data-i18n-bg="Мъжко подстригване" data-i18n-en="Men's cut">Мъжко подстригване</div><div class="d" data-i18n-bg="С измиване · 30 мин" data-i18n-en="With wash · 30 min">С измиване · 30 мин</div></div><div class="price"><div class="eur" data-eur="18">€ 18</div><div class="bgn">35 BGN</div></div></div>
+        <div class="sv-row" data-cat="hairdress" data-name="детско child cut"><div><div class="n" data-i18n-bg="Детско подстригване" data-i18n-en="Children's cut">Детско подстригване</div><div class="d" data-i18n-bg="До 12 г." data-i18n-en="Up to 12 yrs.">До 12 г.</div></div><div class="price"><div class="eur" data-eur="12">€ 12</div><div class="bgn">23 BGN</div></div></div>
+        <div class="sv-row" data-cat="hairdress" data-name="прическа официална event hair"><div><div class="n" data-i18n-bg="Официална прическа" data-i18n-en="Event styling">Официална прическа</div><div class="d" data-i18n-bg="С пробна репетиция при сватба" data-i18n-en="Trial run for brides included">С пробна репетиция при сватба</div><span class="tag" data-i18n-bg="събитие" data-i18n-en="event">събитие</span></div><div class="price"><div class="eur" data-eur="45">от € 45</div><div class="bgn">88 BGN</div></div></div>
+        <div class="sv-row" data-cat="hairdress" data-name="изправяне brush blow"><div><div class="n" data-i18n-bg="Изправяне със сешоар" data-i18n-en="Blow-out">Изправяне със сешоар</div><div class="d" data-i18n-bg="С измиване" data-i18n-en="With wash">С измиване</div></div><div class="price"><div class="eur" data-eur="20">€ 20</div><div class="bgn">39 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== VI. COLOR ====== -->
+    <div class="cat-group" data-group="color" id="color">
+      <div class="cat-head">
+        <div class="num">VI</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Цвят" data-i18n-en="Colour">Цвят</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Боядисване" data-i18n-en="Hair">Боядисване</span> <span class="italic gold" data-i18n-bg="на коса" data-i18n-en="colouring">на коса</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Премиум италиански бои, балаяж и шатуш протоколи. Цветът, който се връща у дома." data-i18n-en="Premium Italian colour, balayage and shatush protocols. The colour that returns home with you.">Премиум италиански бои, балаяж и шатуш протоколи. Цветът, който се връща у дома.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="color" data-name="един тон single tone"><div><div class="n" data-i18n-bg="Един тон · късa коса" data-i18n-en="Single tone · short">Един тон · късa коса</div><div class="d" data-i18n-bg="С измиване и подсушаване" data-i18n-en="Wash & blow-out included">С измиване и подсушаване</div></div><div class="price"><div class="eur" data-eur="38">€ 38</div><div class="bgn">74 BGN</div></div></div>
+        <div class="sv-row" data-cat="color" data-name="един тон средна"><div><div class="n" data-i18n-bg="Един тон · средна" data-i18n-en="Single tone · medium">Един тон · средна</div><div class="d" data-i18n-bg="С измиване и подсушаване" data-i18n-en="Wash & blow-out included">С измиване и подсушаване</div></div><div class="price"><div class="eur" data-eur="48">€ 48</div><div class="bgn">94 BGN</div></div></div>
+        <div class="sv-row" data-cat="color" data-name="един тон дълга"><div><div class="n" data-i18n-bg="Един тон · дълга" data-i18n-en="Single tone · long">Един тон · дълга</div><div class="d" data-i18n-bg="С измиване и подсушаване" data-i18n-en="Wash & blow-out included">С измиване и подсушаване</div></div><div class="price"><div class="eur" data-eur="58">€ 58</div><div class="bgn">113 BGN</div></div></div>
+        <div class="sv-row" data-cat="color" data-name="балаяж balayage"><div><div class="n" data-i18n-bg="Балаяж" data-i18n-en="Balayage">Балаяж</div><div class="d" data-i18n-bg="С тониране и грижа" data-i18n-en="With toning & treatment">С тониране и грижа</div><span class="tag" data-i18n-bg="сигнатура" data-i18n-en="signature">сигнатура</span></div><div class="price"><div class="eur" data-eur="120">от € 120</div><div class="bgn">235 BGN</div></div></div>
+        <div class="sv-row" data-cat="color" data-name="шатуш shatush"><div><div class="n" data-i18n-bg="Шатуш" data-i18n-en="Shatush">Шатуш</div><div class="d" data-i18n-bg="Мек преход · сатенена основа" data-i18n-en="Soft transition · satin base">Мек преход · сатенена основа</div></div><div class="price"><div class="eur" data-eur="110">от € 110</div><div class="bgn">215 BGN</div></div></div>
+        <div class="sv-row" data-cat="color" data-name="кичури highlights"><div><div class="n" data-i18n-bg="Кичури / Хайлайтс" data-i18n-en="Highlights">Кичури / Хайлайтс</div><div class="d" data-i18n-bg="Със silver protocol" data-i18n-en="With silver protocol">Със silver protocol</div></div><div class="price"><div class="eur" data-eur="85">от € 85</div><div class="bgn">166 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== VII. HAIRCARE ====== -->
+    <div class="cat-group" data-group="haircare" id="haircare">
+      <div class="cat-head">
+        <div class="num">VII</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Възстановяване" data-i18n-en="Restoration">Възстановяване</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Терапии" data-i18n-en="Hair">Терапии</span> <span class="italic gold" data-i18n-bg="за коса" data-i18n-en="treatments">за коса</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Ботокс, кератин, нано-възстановяване. За коса, която светне отвътре." data-i18n-en="Botox, keratin, nano-repair. For hair that shines from within.">Ботокс, кератин, нано-възстановяване. За коса, която светне отвътре.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="haircare" data-name="ботокс botox"><div><div class="n" data-i18n-bg="Ботокс за коса" data-i18n-en="Hair botox">Ботокс за коса</div><div class="d" data-i18n-bg="Дълбоко възстановяване" data-i18n-en="Deep repair">Дълбоко възстановяване</div></div><div class="price"><div class="eur" data-eur="65">от € 65</div><div class="bgn">127 BGN</div></div></div>
+        <div class="sv-row" data-cat="haircare" data-name="кератин keratin"><div><div class="n" data-i18n-bg="Кератин · изправяне" data-i18n-en="Keratin · straightening">Кератин · изправяне</div><div class="d" data-i18n-bg="Ефект 3–4 месеца" data-i18n-en="Effect 3–4 months">Ефект 3–4 месеца</div><span class="tag" data-i18n-bg="най-търсено" data-i18n-en="bestseller">най-търсено</span></div><div class="price"><div class="eur" data-eur="120">от € 120</div><div class="bgn">235 BGN</div></div></div>
+        <div class="sv-row" data-cat="haircare" data-name="нано nano repair"><div><div class="n" data-i18n-bg="Нано-възстановяване" data-i18n-en="Nano-repair">Нано-възстановяване</div><div class="d" data-i18n-bg="Молекулярна терапия" data-i18n-en="Molecular therapy">Молекулярна терапия</div></div><div class="price"><div class="eur" data-eur="55">€ 55</div><div class="bgn">108 BGN</div></div></div>
+        <div class="sv-row" data-cat="haircare" data-name="маска mask spa"><div><div class="n" data-i18n-bg="SPA маска за коса" data-i18n-en="SPA hair mask">SPA маска за коса</div><div class="d" data-i18n-bg="Като добавка към процедура" data-i18n-en="As add-on">Като добавка към процедура</div></div><div class="price"><div class="eur" data-eur="18">€ 18</div><div class="bgn">35 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== VIII. MANI / PEDI ====== -->
+    <div class="cat-group" data-group="mani" id="mani">
+      <div class="cat-head">
+        <div class="num">VIII</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Ръце и крака" data-i18n-en="Hands & feet">Ръце и крака</span></div>
+          <h2 class="display" style="margin-top:14px;"><span data-i18n-bg="Маникюр" data-i18n-en="Manicure">Маникюр</span> <span class="italic gold" data-i18n-bg="& педикюр" data-i18n-en="& pedicure">& педикюр</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Класически и японски маникюр, гел-лак с премиум брандове, медицински педикюр." data-i18n-en="Classic & Japanese manicure, gel polish in premium brands, medical pedicure.">Класически и японски маникюр, гел-лак с премиум брандове, медицински педикюр.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="mani" data-name="класически маникюр classic"><div><div class="n" data-i18n-bg="Класически маникюр" data-i18n-en="Classic manicure">Класически маникюр</div><div class="d" data-i18n-bg="С лак" data-i18n-en="With polish">С лак</div></div><div class="price"><div class="eur" data-eur="20">€ 20</div><div class="bgn">39 BGN</div></div></div>
+        <div class="sv-row" data-cat="mani" data-name="гел лак gel polish"><div><div class="n" data-i18n-bg="Маникюр с гел-лак" data-i18n-en="Gel polish manicure">Маникюр с гел-лак</div><div class="d" data-i18n-bg="Издържа 3+ седмици" data-i18n-en="Lasts 3+ weeks">Издържа 3+ седмици</div></div><div class="price"><div class="eur" data-eur="32">€ 32</div><div class="bgn">63 BGN</div></div></div>
+        <div class="sv-row" data-cat="mani" data-name="японски japanese p shine"><div><div class="n" data-i18n-bg="Японски маникюр" data-i18n-en="Japanese manicure">Японски маникюр</div><div class="d" data-i18n-bg="Натурално сияние" data-i18n-en="Natural sheen">Натурално сияние</div><span class="tag" data-i18n-bg="сигнатура" data-i18n-en="signature">сигнатура</span></div><div class="price"><div class="eur" data-eur="35">€ 35</div><div class="bgn">68 BGN</div></div></div>
+        <div class="sv-row" data-cat="mani" data-name="декорация nail art"><div><div class="n" data-i18n-bg="Nail art / декорация" data-i18n-en="Nail art">Nail art / декорация</div><div class="d" data-i18n-bg="На пръст" data-i18n-en="Per nail">На пръст</div></div><div class="price"><div class="eur" data-eur="2">€ 2</div><div class="bgn">4 BGN</div></div></div>
+        <div class="sv-row" data-cat="mani" data-name="педикюр класически"><div><div class="n" data-i18n-bg="Класически педикюр" data-i18n-en="Classic pedicure">Класически педикюр</div><div class="d" data-i18n-bg="С лак" data-i18n-en="With polish">С лак</div></div><div class="price"><div class="eur" data-eur="30">€ 30</div><div class="bgn">59 BGN</div></div></div>
+        <div class="sv-row" data-cat="mani" data-name="педикюр медицински medical"><div><div class="n" data-i18n-bg="Медицински педикюр" data-i18n-en="Medical pedicure">Медицински педикюр</div><div class="d" data-i18n-bg="Без лак · корекция" data-i18n-en="No polish · corrective">Без лак · корекция</div></div><div class="price"><div class="eur" data-eur="45">€ 45</div><div class="bgn">88 BGN</div></div></div>
+        <div class="sv-row" data-cat="mani" data-name="мани педи combo"><div><div class="n" data-i18n-bg="Mani + Pedi (комбо)" data-i18n-en="Mani + Pedi (combo)">Mani + Pedi (комбо)</div><div class="d" data-i18n-bg="С гел-лак" data-i18n-en="With gel">С гел-лак</div></div><div class="price"><div class="eur" data-eur="58">€ 58</div><div class="bgn">113 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- ====== IX. MAKEUP ====== -->
+    <div class="cat-group" data-group="makeup" id="makeup">
+      <div class="cat-head">
+        <div class="num">IX</div>
+        <div>
+          <div class="kicker"><span data-i18n-bg="Финал" data-i18n-en="Finish">Финал</span></div>
+          <h2 class="display" style="margin-top:14px;"><span class="italic gold" data-i18n-bg="Грим" data-i18n-en="Makeup">Грим</span></h2>
+        </div>
+        <p class="lead" data-i18n-bg="Дневен, вечерен, фотосесиен и сватбен грим — с консумативи от премиум серии." data-i18n-en="Day, evening, editorial and bridal makeup — with premium-series products.">Дневен, вечерен, фотосесиен и сватбен грим — с консумативи от премиум серии.</p>
+      </div>
+      <div class="sv-list">
+        <div class="sv-row" data-cat="makeup" data-name="дневен грим day"><div><div class="n" data-i18n-bg="Дневен грим" data-i18n-en="Day makeup">Дневен грим</div><div class="d" data-i18n-bg="40 мин · естествен финиш" data-i18n-en="40 min · natural finish">40 мин · естествен финиш</div></div><div class="price"><div class="eur" data-eur="35">€ 35</div><div class="bgn">68 BGN</div></div></div>
+        <div class="sv-row" data-cat="makeup" data-name="вечерен грим evening"><div><div class="n" data-i18n-bg="Вечерен грим" data-i18n-en="Evening makeup">Вечерен грим</div><div class="d" data-i18n-bg="60 мин · контури и око" data-i18n-en="60 min · contour & eye">60 мин · контури и око</div></div><div class="price"><div class="eur" data-eur="48">€ 48</div><div class="bgn">94 BGN</div></div></div>
+        <div class="sv-row" data-cat="makeup" data-name="фотосесия editorial"><div><div class="n" data-i18n-bg="Грим за фотосесия" data-i18n-en="Editorial makeup">Грим за фотосесия</div><div class="d" data-i18n-bg="75 мин · HD финиш" data-i18n-en="75 min · HD finish">75 мин · HD финиш</div></div><div class="price"><div class="eur" data-eur="65">€ 65</div><div class="bgn">127 BGN</div></div></div>
+        <div class="sv-row" data-cat="makeup" data-name="сватбен bridal"><div><div class="n" data-i18n-bg="Сватбен грим + проба" data-i18n-en="Bridal makeup + trial">Сватбен грим + проба</div><div class="d" data-i18n-bg="С пробна репетиция" data-i18n-en="Trial included">С пробна репетиция</div><span class="tag" data-i18n-bg="сигнатура" data-i18n-en="signature">сигнатура</span></div><div class="price"><div class="eur" data-eur="120">€ 120</div><div class="bgn">235 BGN</div></div></div>
+        <div class="sv-row" data-cat="makeup" data-name="мигли еднодневни strip"><div><div class="n" data-i18n-bg="Изкуствени мигли (еднократни)" data-i18n-en="Strip lashes">Изкуствени мигли (еднократни)</div><div class="d" data-i18n-bg="Добавка към грим" data-i18n-en="Makeup add-on">Добавка към грим</div></div><div class="price"><div class="eur" data-eur="8">€ 8</div><div class="bgn">16 BGN</div></div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="sv-cta reveal" id="membership">
+      <div class="kicker" style="margin-bottom:16px;"><span style="color:var(--gold);">+</span> &nbsp;<span data-i18n-bg="Senti · Or членство" data-i18n-en="Senti · Or Membership">Senti · Or членство</span></div>
+      <h3><span class="italic gold" data-i18n-bg="Постоянство" data-i18n-en="Constancy">Постоянство</span><span data-i18n-bg=", което се отплаща." data-i18n-en=", that rewards.">, което се отплаща.</span></h3>
+      <p data-i18n-bg="−20% на избран ритуал всеки месец, +1 поканен гост годишно, личен консултант. Затворен кръг — попитай в студиото." data-i18n-en="−20% off a chosen ritual every month, +1 guest a year, a personal consultant. A closed circle — ask in the studio.">
+        −20% на избран ритуал всеки месец, +1 поканен гост годишно, личен консултант. Затворен кръг — попитай в студиото.
+      </p>
+      <a href="contact.html" class="btn gold" data-i18n-bg="Резервирай среща" data-i18n-en="Book a visit">Резервирай среща <span class="arrow">→</span></a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  // ---- Filtering ----
+  const chips = document.querySelectorAll(".filterbar .chip");
+  const rows = document.querySelectorAll(".sv-row");
+  const groups = document.querySelectorAll(".cat-group");
+  const search = document.getElementById("searchIn");
+  const empty = document.getElementById("empty");
+  let activeCat = "all";
+
+  const applyFilters = () => {
+    const q = (search.value || "").trim().toLowerCase();
+    let visibleRows = 0;
+    rows.forEach(r=>{
+      const matchCat = activeCat === "all" || r.dataset.cat === activeCat;
+      const haystack = (r.dataset.name + " " + r.textContent).toLowerCase();
+      const matchSearch = !q || haystack.includes(q);
+      const ok = matchCat && matchSearch;
+      r.classList.toggle("hide", !ok);
+      if (ok) visibleRows++;
+    });
+    groups.forEach(g=>{
+      const any = g.querySelectorAll(".sv-row:not(.hide)").length > 0;
+      g.classList.toggle("hide", !any);
+    });
+    empty.style.display = visibleRows ? "none" : "block";
+  };
+
+  chips.forEach(c=>{
+    c.addEventListener("click", ()=>{
+      chips.forEach(x=>x.classList.remove("on"));
+      c.classList.add("on");
+      activeCat = c.dataset.cat;
+      applyFilters();
+    });
+  });
+  search.addEventListener("input", applyFilters);
+
+  // hash-jump category
+  const hash = location.hash.replace("#","");
+  if (hash){
+    const chip = document.querySelector(`.chip[data-cat="${hash}"]`);
+    if (chip){ chip.click(); }
+  }
+
+  // ---- Currency toggle ----
+  const buttons = document.querySelectorAll("#cur button");
+  const setCur = (cur) => {
+    buttons.forEach(b=>b.classList.toggle("on", b.dataset.cur===cur));
+    document.querySelectorAll(".eur").forEach(el=>{
+      const e = parseFloat(el.dataset.eur);
+      const isFrom = el.textContent.includes("от");
+      if (cur === "BGN"){
+        const bgn = Math.round(e * 1.95583);
+        el.textContent = (isFrom ? "от " : "") + bgn + " BGN";
+      } else {
+        el.textContent = (isFrom ? "от " : "") + "€ " + e;
+      }
+    });
+    document.querySelectorAll(".bgn").forEach(el=>{
+      // toggle which secondary label we show
+      el.style.display = cur === "BGN" ? "none" : "";
+    });
+    localStorage.setItem("lbs-cur", cur);
+  };
+  buttons.forEach(b=>b.addEventListener("click", ()=>setCur(b.dataset.cur)));
+  const savedCur = localStorage.getItem("lbs-cur") || "EUR";
+  setCur(savedCur);
+
+  // localize search placeholder
+  const updPh = () => {
+    const lang = localStorage.getItem("lbs-lang") || "bg";
+    search.placeholder = search.getAttribute(`data-ph-${lang}`) || search.placeholder;
+  };
+  updPh();
+  window.addEventListener("storage", updPh);
+  document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click", ()=>setTimeout(updPh,30)));
+})();
+</script>
+<script src="assets/site.js"></script>
+</body>
+</html>

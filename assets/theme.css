@@ -1,0 +1,436 @@
+/* La Bella Senti — Lavender Purple + Champagne theme (light) */
+:root{
+  /* Surfaces — soft champagne washed with lavender */
+  --bg:#F5ECDD;          /* primary page — warm champagne */
+  --bg-2:#EFE2EE;        /* lavender mist surface */
+  --bg-3:#E7D7E6;        /* deeper lavender card surface */
+  --bg-champagne:#F0E3CD;/* champagne card surface */
+  --bg-lavender:#E5D5E8; /* lavender accent surface */
+
+  /* Ink — deep optimistic plum, not black */
+  --ink:#2E2541;
+  --ink-mute:#5D4E73;
+  --ink-dim:#9489A6;
+
+  /* Hairlines — lavender-tinted */
+  --line:rgba(155,125,191,.28);
+  --line-strong:rgba(155,125,191,.55);
+
+  /* Champagne accents (darkened so they read on light bg) */
+  --gold:#A07A38;
+  --gold-2:#C9A96A;
+  --gold-3:#7A5B2C;
+  --gold-glow:0 0 24px rgba(160,122,56,.28);
+
+  /* Lavender accents */
+  --lavender:#9B7DBF;
+  --lavender-2:#C4ABDE;
+  --lavender-3:#7A5BA0;
+
+  --rose-shadow:#c9b6c8;
+  --maxw:1320px;
+  --grad-gold:linear-gradient(135deg,#7A5B2C 0%,#A07A38 25%,#E4CB8E 50%,#A07A38 75%,#7A5B2C 100%);
+  --grad-page:
+    radial-gradient(1200px 700px at 75% -10%, rgba(155,125,191,.22), transparent 60%),
+    radial-gradient(900px 600px at -10% 30%, rgba(217,185,120,.20), transparent 60%),
+    linear-gradient(180deg,#F5ECDD 0%, #EEE0EC 55%, #F5ECDD 100%);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"ss01","kern";
+  line-height:1.55;
+  letter-spacing:0.01em;
+  overflow-x:hidden;
+}
+
+/* ---- type ---- */
+.serif{font-family:"Cormorant Garamond","Times New Roman",serif;font-weight:400;letter-spacing:0;}
+.display{
+  font-family:"Cormorant Garamond","Times New Roman",serif;
+  font-weight:300;
+  font-style:normal;
+  letter-spacing:-0.01em;
+  line-height:0.95;
+}
+.script{font-family:"Pinyon Script","Allura",cursive;}
+.eyebrow{
+  font-family:"Jost",sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:0.36em;
+  font-size:11px;
+  color:var(--gold);
+}
+.eyebrow .dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;margin:0 12px 2px;vertical-align:middle;box-shadow:0 0 10px var(--gold);}
+.kicker{font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--ink-mute);}
+
+h1,h2,h3,h4{font-family:"Cormorant Garamond",serif;font-weight:300;letter-spacing:-0.01em;margin:0;}
+h1{font-size:clamp(56px,9vw,128px);line-height:0.92;}
+h2{font-size:clamp(40px,5.4vw,76px);line-height:0.98;}
+h3{font-size:clamp(24px,2.4vw,34px);line-height:1.1;}
+p{margin:0 0 1em;color:var(--ink-mute);max-width:60ch;}
+
+.gold{
+  background:var(--grad-gold);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.italic{font-style:italic;font-family:"Cormorant Garamond",serif;font-weight:300;}
+
+/* ---- layout ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+.section{padding:140px 0;position:relative;}
+.section.tight{padding:90px 0;}
+
+.hair{height:1px;background:linear-gradient(90deg,transparent,var(--line-strong),transparent);width:100%;}
+.hair-v{width:1px;background:linear-gradient(180deg,transparent,var(--line-strong),transparent);}
+
+/* ---- nav ---- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 40px;
+  transition:all .4s ease;
+  backdrop-filter:blur(0px);
+}
+.nav.scrolled{
+  background:rgba(245,236,221,.78);
+  backdrop-filter:blur(14px) saturate(120%);
+  border-bottom:1px solid var(--line);
+  padding:14px 40px;
+}
+.nav-brand{display:flex;align-items:center;gap:14px;color:var(--ink);text-decoration:none;}
+.nav-brand .mark{font-family:"Pinyon Script",cursive;font-size:36px;color:var(--gold);line-height:1;}
+.nav-brand .wordmark{font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:0.42em;text-transform:uppercase;}
+.nav-brand .sub{font-size:9px;letter-spacing:0.5em;color:var(--ink-dim);text-transform:uppercase;margin-top:2px;}
+.nav-links{display:flex;gap:38px;align-items:center;}
+.nav-links a{color:var(--ink-mute);text-decoration:none;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;position:relative;padding:6px 0;transition:color .3s;}
+.nav-links a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:1px;background:var(--gold);transition:left .35s,right .35s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a:hover::after,.nav-links a.active::after{left:0;right:0;}
+.nav-links a.active{color:var(--gold);}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.lang{display:flex;gap:0;border:1px solid var(--line);border-radius:999px;overflow:hidden;}
+.lang button{background:transparent;color:var(--ink-mute);border:0;font:inherit;padding:6px 12px;font-size:10px;letter-spacing:0.22em;cursor:pointer;text-transform:uppercase;}
+.lang button.on{background:var(--gold);color:#fff;}
+
+/* ---- buttons ---- */
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font:inherit;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;
+  padding:18px 30px;border-radius:999px;cursor:pointer;
+  text-decoration:none;color:var(--ink);
+  transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+  position:relative;border:1px solid var(--line-strong);
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.15));
+}
+.btn .arrow{display:inline-block;transition:transform .3s;}
+.btn:hover .arrow{transform:translateX(4px);}
+.btn:hover{transform:translateY(-1px);}
+.btn.gold{
+  background:var(--grad-gold);
+  color:#FFF8EA;border:0;
+  -webkit-text-fill-color:#FFF8EA;
+  -webkit-background-clip:border-box;background-clip:border-box;
+  box-shadow:0 0 0 1px rgba(160,122,56,.55) inset, 0 14px 40px -10px rgba(160,122,56,.40);
+}
+.btn.gold:hover{box-shadow:0 0 0 1px rgba(160,122,56,.75) inset, 0 18px 50px -8px rgba(160,122,56,.55);}
+.btn.ghost{background:transparent;}
+
+/* gold thin line decorations */
+.gold-line{height:1px;background:var(--grad-gold);}
+.corner{position:absolute;width:42px;height:42px;border:1px solid var(--gold);}
+.corner.tl{top:18px;left:18px;border-right:0;border-bottom:0;}
+.corner.tr{top:18px;right:18px;border-left:0;border-bottom:0;}
+.corner.bl{bottom:18px;left:18px;border-right:0;border-top:0;}
+.corner.br{bottom:18px;right:18px;border-left:0;border-top:0;}
+
+/* image placeholders */
+.imgph{
+  background:
+    repeating-linear-gradient(135deg,rgba(160,122,56,.10) 0 2px,transparent 2px 14px),
+    linear-gradient(160deg,#EDDEC2,#E5D4E6);
+  border:1px solid var(--line);
+  position:relative;color:var(--gold-3);
+  font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;
+}
+.imgph::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(160,122,56,.18),transparent 60%);pointer-events:none;}
+
+/* ---- glow utilities ---- */
+.glow-gold{box-shadow:0 0 60px -10px rgba(201,169,106,.35);}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 100%,rgba(46,37,65,.12),transparent 60%),radial-gradient(ellipse at 50% 0%,rgba(46,37,65,.08),transparent 60%);}
+
+/* ---- footer ---- */
+footer.lbs{
+  background:linear-gradient(180deg,#EBDCDF,#E4D2E4);
+  border-top:1px solid var(--line);
+  padding:90px 0 30px;position:relative;
+}
+footer.lbs::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad-gold);opacity:.6;}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;padding:0 32px;max-width:var(--maxw);margin:0 auto;}
+.foot-grid h4{font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);font-family:"Jost",sans-serif;margin-bottom:24px;font-weight:400;}
+.foot-grid a{color:var(--ink-mute);text-decoration:none;display:block;padding:6px 0;font-size:13px;letter-spacing:0.05em;transition:color .25s;}
+.foot-grid a:hover{color:var(--gold);}
+.foot-bot{max-width:var(--maxw);margin:60px auto 0;padding:30px 32px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink-dim);}
+
+/* sticky CTA */
+.sticky-book{
+  position:fixed;right:28px;bottom:28px;z-index:40;
+  padding:14px 22px;border-radius:999px;
+  background:var(--grad-gold);color:#FFF8EA;
+  font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+  text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 14px 50px -10px rgba(160,122,56,.55), 0 0 0 1px rgba(160,122,56,.5) inset;
+  opacity:0;transform:translateY(20px);pointer-events:none;
+  transition:opacity .5s ease, transform .5s ease;
+}
+.sticky-book.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.sticky-book::before{content:"";width:7px;height:7px;border-radius:50%;background:#FFF8EA;box-shadow:0 0 10px rgba(255,248,234,.8);}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease, transform 1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms);}
+.reveal.in{opacity:1;transform:none;}
+
+/* page chrome */
+.page-pad{padding-top:120px;}
+
+/* mobile */
+@media (max-width: 920px){
+  .nav-links{display:none;}
+  .nav{padding:14px 20px;}
+  .wrap{padding:0 20px;}
+  .section{padding:90px 0;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:40px;padding:0 20px;}
+  .foot-bot{padding:24px 20px 0;flex-direction:column;gap:14px;}
+}
+
+/* shimmer */
+@keyframes shimmer{
+  0%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+.shimmer{
+  background:linear-gradient(90deg,transparent,rgba(228,203,142,.18),transparent);
+  background-size:200% 100%;
+  animation:shimmer 4s linear infinite;
+}
+
+/* gold particles bg */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.particles span{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--lavender);opacity:.5;
+  box-shadow:0 0 6px var(--lavender);
+}
+
+/* utility */
+.row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+.between{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
+.center{text-align:center;}
+.muted{color:var(--ink-mute);}
+.dim{color:var(--ink-dim);}
+
+/* ================================================================
+   EXTRACTED INLINE STYLES
+   Collected from index.html · about.html · contact.html · services.html
+   Replace matching style="…" attributes with the class name below.
+   ================================================================ */
+
+/* --- Reveal animation delay utilities ---
+   Used on .reveal elements — JS reads var(--d) to stagger entrance animations
+   · index.html    — hero, bento cards, packages, tips, testimonials, gallery, membership
+   · about.html    — about-hero, pillars, timeline items, trust list, closing
+   · contact.html  — heading, map/form block
+   · services.html — hero, pricing strip */
+.d-120 { --d: 120ms; }
+.d-160 { --d: 160ms; }
+.d-200 { --d: 200ms; }
+.d-240 { --d: 240ms; }
+.d-280 { --d: 280ms; }
+.d-300 { --d: 300ms; }
+.d-360 { --d: 360ms; }
+.d-420 { --d: 420ms; }
+.d-440 { --d: 440ms; }
+.d-480 { --d: 480ms; }
+.d-600 { --d: 600ms; }
+
+/* --- Section background: gold wash gradient ---
+   Barely-visible champagne fade used to visually separate alternate sections
+   · index.html — #packages     ("Curated Luxury")
+   · index.html — #testimonials ("Words of Trust")
+   · about.html — Timeline section (opacity .03 inline; visually interchangeable) */
+.bg-gold-wash {
+  background: linear-gradient(180deg, transparent, rgba(201,169,106,.04), transparent);
+}
+
+/* --- Flat gold text colour (solid, not the gradient clip effect of .gold) ---
+   Used on kicker numeral <span>s (I, II, III …) and the membership + label
+   · index.html    — six section kickers (I–VI)
+   · about.html    — three section kickers (I–III)
+   · services.html — membership kicker (+) */
+.text-gold { color: var(--gold); }
+
+/* --- Hero sidebar: outer column wrapper ---
+   Stacks .sidebar-label above .sidebar-line in the hero aside
+   · index.html — Hero section, left sidebar */
+.sidebar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* --- Hero sidebar: rotated location label ---
+   "EST · MMXXIV · SOFIA" running vertically bottom-to-top
+   · index.html — Hero section, sidebar */
+.sidebar-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--ink-dim);
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+/* --- Hero sidebar: gold vertical fade line ---
+   1 px line that dissolves to transparent at both ends
+   · index.html — Hero section, sidebar decorative line */
+.sidebar-line {
+  display: block;
+  width: 1px;
+  height: 140px;
+  background: linear-gradient(180deg, transparent, var(--gold), transparent);
+}
+
+/* --- Hero meta: short horizontal rule ---
+   24 px hairline separator between items in the .hero-meta row
+   · index.html — Hero section, .hero-meta */
+.meta-rule {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+/* --- Hero meta: spaced gold anchor (no underline) ---
+   Instagram handle link in the hero meta row
+   · index.html — Hero section, @la_bella_senti */
+.link-gold {
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: .3em;
+}
+
+/* --- Gallery header: right-aligned, bottom-anchored flex ---
+   Pushes the "view all" CTA to the bottom-right of the gallery header
+   · index.html — Gallery section, .right header div */
+.flex-end-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* --- VIP card: header row (space-between, top-aligned) ---
+   Splits the Pinyon-Script monogram (left) from the balance badge (right)
+   · index.html — VIP Membership section, card top row */
+.card-row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* --- VIP card: brand micro-label ---
+   Tiny uppercase letterspaced "La Bella Senti" tag above the monogram
+   · index.html — VIP Membership section, card brand label */
+.vip-label-micro {
+  font-size: 9px;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+}
+
+/* --- VIP card: Pinyon Script gold initial ---
+   Large "B" monogram rendered in the script typeface
+   · index.html — VIP Membership section, card monogram */
+.vip-monogram {
+  font-family: 'Pinyon Script', cursive;
+  color: var(--gold);
+  font-size: 54px;
+  line-height: 1;
+}
+
+/* --- VIP card: Cormorant italic member name ---
+   "Madame · Bella" — serif italic override on .vip-name
+   · index.html — VIP Membership section, card member name */
+.vip-name-serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-top: 4px;
+}
+
+/* --- Bento card footer: standard top gap ---
+   Pushes the .bot description away from the card body
+   · index.html — Services Bento section, 7 × .bot divs in service cards */
+.bot-mt { margin-top: 10px; }
+
+/* --- Services category heading: top gap ---
+   Separates the .display h2 from the category filter chip above it
+   · services.html — all 9 service category headings */
+.category-heading-mt { margin-top: 14px; }
+
+/* --- Package ribbons: gradient fills ---
+   Three tonal gold corner-ribbon badges on the package cards
+   · index.html — Packages section */
+
+/* "Събитие / Event" ribbon */
+.ribbon-event  { background: linear-gradient(135deg, #A07A38, #E4CB8E); }
+/* "Курс / Course" ribbon */
+.ribbon-course { background: linear-gradient(135deg, #7A5B2C, #C9A96A); }
+/* "Подарък / Gift" ribbon — tri-tone shimmer */
+.ribbon-gift   { background: linear-gradient(135deg, #A07A38, #FFF3CF, #A07A38); }
+
+/* --- Package image placeholders: unique card gradients ---
+   Soft radial + directional gradient stand-ins until real photos are swapped in
+   · index.html — Packages section, each .imgph */
+
+/* Bridal package */
+.imgph-bridal { background: radial-gradient(ellipse at 30% 30%, rgba(255,200,200,.35), transparent 60%), linear-gradient(160deg, #F2DCDF, #E8D5EC); }
+/* Event (hair + makeup) package */
+.imgph-event  { background: radial-gradient(ellipse at 50% 30%, rgba(228,203,142,.45), transparent 60%), linear-gradient(160deg, #F2E1B8, #EAD7E8); }
+/* Glow Up package */
+.imgph-glow   { background: radial-gradient(ellipse at 70% 30%, rgba(228,203,142,.4),  transparent 60%), linear-gradient(160deg, #ECD8EE, #F2E1B8); }
+/* Laser course (6-session) package */
+.imgph-laser  { background: radial-gradient(ellipse at 40% 40%, rgba(201,169,106,.5),  transparent 60%), linear-gradient(160deg, #F4E2B4, #EBD3D6); }
+/* Intro −15% package */
+.imgph-intro  { background: radial-gradient(ellipse at 50% 50%, rgba(228,203,142,.4),  transparent 60%), linear-gradient(160deg, #EDDEC2, #E2CFE6); }
+/* Gift card package */
+.imgph-gift   { background: radial-gradient(ellipse at 50% 30%, rgba(228,203,142,.5),  transparent 60%), linear-gradient(160deg, #F2E1B8, #E5D2E8); }
+
+/* --- Gift card: variable price range display size ---
+   · index.html — Packages section, Gift Card .price-eur "€ 50 — 500" */
+.price-eur-range {
+  font-size: 24px;
+  letter-spacing: .1em;
+}
+
+/* --- Contact panel kicker: bottom gap ---
+   · contact.html — "For a fast booking" kicker, "Gift card" kicker */
+.kicker-mb { margin-bottom: 14px; }
+
+/* --- Contact panel CTAs: left-align within flex column ---
+   · contact.html — @la_bella_senti button, "Order a card" button */
+.btn-self-start { align-self: flex-start; }

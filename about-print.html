@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>За мен — La Bella Senti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/theme.css"/>
+<style>
+  .about-hero{
+    padding:160px 0 100px;
+    background:var(--grad-page);
+    position:relative;overflow:hidden;
+  }
+  .about-hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 700px 500px at 80% 10%, rgba(201,169,106,.16), transparent 60%),
+      radial-gradient(ellipse 400px 300px at 10% 80%, rgba(201,169,106,.08), transparent 60%);
+  }
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;
+    position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 40px;
+  }
+  @media(max-width:960px){.about-grid{grid-template-columns:1fr;gap:50px;}}
+
+  .ab-port{
+    position:relative;aspect-ratio:4/5;
+    border:1px solid var(--line-strong);
+    overflow:hidden;
+    background:url("assets/owner.png") center 18% / cover no-repeat;
+  }
+  .ab-port::before{content:"";position:absolute;inset:-14px;border:1px solid var(--line);}
+  .ab-port::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%, rgba(8,7,10,.7));}
+  .ab-port .seal{
+    position:absolute;left:24px;top:24px;width:80px;height:80px;
+    border:1px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:14px;text-align:center;line-height:1.1;
+    background:rgba(0,0,0,.4);backdrop-filter:blur(4px);z-index:2;
+  }
+  .ab-port .sigblock{
+    position:absolute;left:24px;bottom:24px;right:24px;z-index:2;
+    display:flex;justify-content:space-between;align-items:end;
+    padding-top:18px;border-top:1px solid var(--line-strong);
+  }
+  .ab-port .sig{font-family:"Pinyon Script",cursive;font-size:54px;color:var(--gold);line-height:1;}
+  .ab-port .role{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-dim);text-align:right;}
+
+  .ab-copy h1{
+    font-size:clamp(56px,7.5vw,108px);
+    line-height:.94;margin-bottom:34px;
+  }
+  .ab-copy .lead{font-size:18px;line-height:1.7;color:var(--ink-mute);margin-bottom:30px;max-width:50ch;}
+  .ab-fact{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;padding-top:30px;border-top:1px solid var(--line);}
+  .ab-fact .f{}
+  .ab-fact .num{font-family:"Cormorant Garamond",serif;font-size:48px;color:var(--gold);font-style:italic;line-height:1;}
+  .ab-fact .lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);margin-top:10px;}
+
+  /* Philosophy */
+  .philo{
+    padding:140px 0;
+    background:linear-gradient(180deg,transparent, rgba(201,169,106,.04), transparent);
+    position:relative;
+  }
+  .pull-quote{
+    max-width:1000px;margin:0 auto;text-align:center;padding:0 32px;position:relative;
+  }
+  .pull-quote .mark{font-family:"Cormorant Garamond",serif;font-size:160px;color:var(--gold);line-height:.5;height:60px;}
+  .pull-quote q{
+    quotes:none;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;font-weight:300;
+    font-size:clamp(32px,4.4vw,58px);
+    line-height:1.15;
+    color:var(--ink);
+    display:block;
+    margin:30px 0;
+  }
+  .pull-quote q .em{color:var(--gold);}
+  .pull-quote .att{color:var(--ink-dim);font-size:11px;letter-spacing:.4em;text-transform:uppercase;margin-top:30px;}
+
+  /* Pillars */
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  @media(max-width:960px){.pillars{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.pillars{grid-template-columns:1fr;}}
+  .pillar{
+    border:1px solid var(--line);
+    padding:36px 28px;
+    background:linear-gradient(160deg,rgba(255,255,255,.02),rgba(0,0,0,0));
+    position:relative;transition:border-color .4s, transform .4s;
+  }
+  .pillar:hover{border-color:var(--line-strong);transform:translateY(-3px);}
+  .pillar .rm{color:var(--gold);font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;letter-spacing:.05em;margin-bottom:30px;display:block;}
+  .pillar h3{font-size:26px;margin-bottom:14px;}
+  .pillar p{font-size:13.5px;line-height:1.65;}
+
+  /* Timeline */
+  .tl-wrap{position:relative;padding-left:60px;}
+  .tl-wrap::before{content:"";position:absolute;left:24px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,transparent, var(--gold), transparent);}
+  .tl-item{position:relative;padding:0 0 50px 0;}
+  .tl-item::before{
+    content:"";position:absolute;left:-44px;top:14px;width:13px;height:13px;border-radius:50%;
+    background:radial-gradient(circle, var(--gold-2), var(--gold-3));
+    box-shadow:0 0 16px var(--gold);
+  }
+  .tl-item .yr{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-size:34px;line-height:1;margin-bottom:12px;}
+  .tl-item h3{font-size:26px;margin-bottom:8px;}
+  .tl-item p{max-width:62ch;}
+
+  /* Trust */
+  .trust{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start;}
+  @media(max-width:960px){.trust{grid-template-columns:1fr;}}
+  .trust-list{display:grid;gap:0;border-top:1px solid var(--line);}
+  .trust-list .row{display:grid;grid-template-columns:60px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start;}
+  .trust-list .row .ic{
+    width:44px;height:44px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;
+  }
+  .trust-list h4{font-size:22px;margin-bottom:4px;}
+  .trust-list p{font-size:13.5px;}
+
+  .closing{
+    text-align:center;padding:140px 32px 160px;position:relative;
+    background:linear-gradient(180deg, transparent, rgba(201,169,106,.05), rgba(8,7,10,1));
+  }
+  .closing h2{margin-bottom:30px;}
+  .closing .sig{font-family:"Pinyon Script",cursive;font-size:80px;color:var(--gold);line-height:1;margin-top:20px;}
+
+  /* ============ PRINT ============ */
+  @page{ size: A4 portrait; margin: 0; }
+  @media print{
+    html, body{
+      background:#08070a !important;
+      color:var(--ink);
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      overflow:visible !important;
+    }
+    /* Hide site chrome */
+    .nav, footer.lbs, .sticky-book{ display:none !important; }
+    /* Force reveals visible */
+    .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+    /* Stop animations */
+    *,*::before,*::after{ animation: none !important; transition: none !important; }
+    a{ color: inherit !important; text-decoration: none !important; }
+
+    /* Each major section becomes its own page */
+    section.about-hero,
+    section.philo,
+    section.section,
+    section.closing{
+      break-after: page;
+      page-break-after: always;
+      min-height: 297mm;
+      height: auto;
+      padding: 0 !important;
+      display:flex; flex-direction:column; justify-content:center;
+      background:#08070a !important;
+      overflow:visible !important;
+    }
+    section.closing{ break-after: auto; page-break-after: auto; }
+
+    .wrap{ padding: 12mm 16mm !important; max-width:none !important; }
+
+    /* HERO */
+    .about-hero{ min-height: 297mm !important; padding: 12mm 0 !important; }
+    .about-hero::before{ display:none; }
+    .about-grid{
+      grid-template-columns: .9fr 1.1fr !important;
+      gap: 14mm !important;
+      padding: 0 16mm !important;
+      align-items:center !important;
+    }
+    .ab-port{ aspect-ratio: 4/5 !important; max-height: 220mm; }
+    .ab-port::before, .ab-port::after{ display:block; }
+    .ab-copy h1{ font-size: 56pt !important; line-height: .95 !important; margin-bottom: 8mm !important; }
+    .ab-copy .lead{ font-size: 11pt !important; max-width: 50ch !important; margin-bottom: 6mm !important; }
+    .ab-copy p{ font-size: 10pt !important; line-height: 1.55 !important; }
+    .ab-fact{ grid-template-columns: repeat(3,1fr) !important; gap: 6mm !important; margin-top: 10mm !important; padding-top: 6mm !important; }
+    .ab-fact .num{ font-size: 32pt !important; }
+    .ab-fact .lbl{ font-size: 8pt !important; }
+
+    /* PHILOSOPHY */
+    .philo{ min-height: 297mm !important; padding: 0 !important; }
+    .pull-quote{ padding: 0 28mm !important; }
+    .pull-quote .mark{ font-size: 90pt !important; height: 30mm !important; }
+    .pull-quote q{ font-size: 26pt !important; margin: 8mm 0 !important; }
+    .pull-quote .att{ font-size: 8pt !important; margin-top: 10mm !important; }
+
+    /* PILLARS section */
+    .pillars{ grid-template-columns: repeat(4,1fr) !important; gap: 4mm !important; }
+    .pillar{ padding: 8mm 6mm !important; break-inside: avoid; page-break-inside: avoid; }
+    .pillar .rm{ font-size: 14pt !important; margin-bottom: 12mm !important; }
+    .pillar h3{ font-size: 16pt !important; }
+    .pillar p{ font-size: 9.5pt !important; line-height: 1.55 !important; }
+
+    /* TIMELINE */
+    .tl-wrap{ padding-left: 20mm !important; }
+    .tl-wrap::before{ left: 8mm !important; }
+    .tl-item{ padding-bottom: 8mm !important; break-inside: avoid; page-break-inside: avoid; }
+    .tl-item::before{ left: -14mm !important; width: 9px !important; height: 9px !important; }
+    .tl-item .yr{ font-size: 20pt !important; margin-bottom: 4mm !important; }
+    .tl-item h3{ font-size: 14pt !important; }
+    .tl-item p{ font-size: 9.5pt !important; line-height: 1.55 !important; max-width: 70ch !important; }
+
+    /* TRUST */
+    .trust{ grid-template-columns: 1fr 1.2fr !important; gap: 14mm !important; }
+    .trust-list .row{ padding: 4mm 0 !important; }
+    .trust-list h4{ font-size: 13pt !important; }
+    .trust-list p{ font-size: 9.5pt !important; }
+    .trust-list .ic{ width: 10mm !important; height: 10mm !important; font-size: 13pt !important; }
+    .trust .btn{ display:none !important; }
+
+    /* SECT HEAD */
+    .sect-head{ grid-template-columns: 1fr !important; gap: 8mm !important; margin-bottom: 10mm !important; padding-bottom: 6mm !important; }
+    .sect-head h2{ font-size: 32pt !important; }
+    .sect-head .right{ font-size: 10pt !important; max-width: 70ch !important; }
+    .kicker, .eyebrow{ font-size: 8pt !important; letter-spacing: .35em !important; }
+
+    /* CLOSING */
+    .closing{ min-height: 297mm !important; padding: 30mm 16mm !important; justify-content:center !important; }
+    .closing h2{ font-size: 48pt !important; }
+    .closing .sig{ font-size: 60pt !important; }
+    .closing .btn{ display:none !important; }
+
+    h1,h2,h3{ break-after:avoid; page-break-after:avoid; }
+  }
+
+</style>
+</head>
+<body data-page="about">
+
+<!-- HERO -->
+<section class="about-hero" data-screen-label="About Hero">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="ab-port">
+        <div class="seal">EST<br/>MMXXIV<br/>SOFIA</div>
+        <div class="sigblock">
+          <span class="sig">Andjelina</span>
+          <span class="role" data-i18n-bg="Основател<br/>La Bella Senti" data-i18n-en="Founder<br/>La Bella Senti">Основател<br/>La Bella Senti</span>
+        </div>
+      </div>
+    </div>
+    <div class="ab-copy">
+      <div class="eyebrow reveal" data-i18n-bg="Запознай се с майстора" data-i18n-en="Meet the maker">Запознай се с майстора</div>
+      <h1 class="reveal" style="--d:120ms;">
+        <span data-i18n-bg="Анджелина" data-i18n-en="Andjelina">Анджелина</span><br/>
+        <span class="italic gold" data-i18n-bg="Милчева." data-i18n-en="Milcheva.">Милчева.</span>
+      </h1>
+      <p class="lead reveal" style="--d:240ms;" data-i18n-bg="Преди петнадесет години аз направих първия си грим. Преди десет — отворих първото си работно място. През 2024 родих La Bella Senti — място, в което професионализмът и тишината се срещат на едно и също огледало." data-i18n-en="Fifteen years ago I did my first makeup. Ten years ago I had my first chair. In 2024 I founded La Bella Senti — a place where professionalism and quiet meet at the same mirror.">
+        Преди петнадесет години аз направих първия си грим. Преди десет — отворих първото си работно място. През 2024 родих La Bella Senti — място, в което професионализмът и тишината се срещат на едно и също огледало.
+      </p>
+      <p class="reveal" style="--d:360ms;" data-i18n-bg="Вярвам, че красотата не се прави на показ. Тя се случва тихо, в детайла — в линията на веждата, в наклона на косата, в светлината, която сама се връща на лицето." data-i18n-en="I believe beauty isn't put on display. It happens quietly, in the detail — in the line of a brow, the lean of the hair, the light that returns on its own to the face.">
+        Вярвам, че красотата не се прави на показ. Тя се случва тихо, в детайла — в линията на веждата, в наклона на косата, в светлината, която сама се връща на лицето.
+      </p>
+
+      <div class="ab-fact reveal" style="--d:480ms;">
+        <div class="f"><div class="num">15+</div><div class="lbl" data-i18n-bg="Години опит" data-i18n-en="Years' experience">Години опит</div></div>
+        <div class="f"><div class="num">9</div><div class="lbl" data-i18n-bg="Сигнатурни ритуала" data-i18n-en="Signature rituals">Сигнатурни ритуала</div></div>
+        <div class="f"><div class="num">450+</div><div class="lbl" data-i18n-bg="Доверени клиентки" data-i18n-en="Devoted clients">Доверени клиентки</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philo" data-screen-label="Philosophy">
+  <div class="pull-quote reveal">
+    <div class="mark">"</div>
+    <q>
+      <span data-i18n-bg="Красотата е навик. Тя не идва от продукт, тя идва от " data-i18n-en="Beauty is a habit. It doesn't come from a product, it comes from ">Красотата е навик. Тя не идва от продукт, тя идва от </span><span class="em italic" data-i18n-bg="вниманието" data-i18n-en="attention">вниманието</span><span data-i18n-bg=", което си даваш всеки ден." data-i18n-en=" you give yourself, every single day.">, което си даваш всеки ден.</span>
+    </q>
+    <div class="att" data-i18n-bg="— Андж · Личен код" data-i18n-en="— Andj · Personal code">— Андж · Личен код</div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="section" data-screen-label="Pillars">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <div class="kicker"><span style="color:var(--gold);">I.</span> &nbsp; <span data-i18n-bg="Принципи" data-i18n-en="Principles">Принципи</span></div>
+        <h2 class="display"><span data-i18n-bg="Четирите" data-i18n-en="The four">Четирите</span> <span class="italic gold" data-i18n-bg="стълба." data-i18n-en="pillars.">стълба.</span></h2>
+      </div>
+      <div class="right" data-i18n-bg="Това, което прави една процедура процедура от La Bella Senti — четири принципа, които не правят компромис." data-i18n-en="What makes a procedure a La Bella Senti procedure — four principles that don't compromise.">
+        Това, което прави една процедура процедура от La Bella Senti — четири принципа, които не правят компромис.
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="rm">I.</span>
+        <h3 data-i18n-bg="Прецизност" data-i18n-en="Precision">Прецизност</h3>
+        <p data-i18n-bg="Всяко движение е премерено. Без излишен жест, без бърза работа. Времето в студиото принадлежи на резултата." data-i18n-en="Every movement is measured. No wasted gesture, no rushed work. Studio time belongs to the result.">Всяко движение е премерено. Без излишен жест, без бърза работа. Времето в студиото принадлежи на резултата.</p>
+      </div>
+      <div class="pillar reveal" style="--d:120ms;">
+        <span class="rm">II.</span>
+        <h3 data-i18n-bg="Дискретност" data-i18n-en="Discretion">Дискретност</h3>
+        <p data-i18n-bg="Един клиент в стаята. Една грижа в момента. Без двойни записвания и без шум — пространството е твое." data-i18n-en="One client in the room. One care at a time. No double bookings, no noise — the space is yours.">Един клиент в стаята. Една грижа в момента. Без двойни записвания и без шум — пространството е твое.</p>
+      </div>
+      <div class="pillar reveal" style="--d:240ms;">
+        <span class="rm">III.</span>
+        <h3 data-i18n-bg="Технология" data-i18n-en="Technology">Технология</h3>
+        <p data-i18n-bg="Сертифицирани медицински апарати, премиум брандове, протоколи, които работят в чужди клиники — донесени в София." data-i18n-en="Certified medical-grade devices, premium brands, protocols that work in foreign clinics — brought to Sofia.">Сертифицирани медицински апарати, премиум брандове, протоколи, които работят в чужди клиники — донесени в София.</p>
+      </div>
+      <div class="pillar reveal" style="--d:360ms;">
+        <span class="rm">IV.</span>
+        <h3 data-i18n-bg="Естественост" data-i18n-en="Natural" >Естественост</h3>
+        <p data-i18n-bg="Резултатът трябва да изглежда като теб — само повече светла, повече себе си. Без знаци, без преигравания." data-i18n-en="The result should look like you — only brighter, only more yourself. No tells, no overplay.">Резултатът трябва да изглежда като теб — само повече светла, повече себе си. Без знаци, без преигравания.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" data-screen-label="Timeline" style="background:linear-gradient(180deg, transparent, rgba(201,169,106,.03), transparent);">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <div class="kicker"><span style="color:var(--gold);">II.</span> &nbsp; <span data-i18n-bg="Пътят" data-i18n-en="The path">Пътят</span></div>
+        <h2 class="display"><span data-i18n-bg="От тогава" data-i18n-en="From then,">От тогава,</span><br/><span class="italic gold" data-i18n-bg="до тук." data-i18n-en="to here.">до тук.</span></h2>
+      </div>
+      <div class="right" data-i18n-bg="Опит, събран от практика, от международни обучения и от 450+ срещи с истински жени." data-i18n-en="Experience built from practice, from international training and from 450+ meetings with real women.">
+        Опит, събран от практика, от международни обучения и от 450+ срещи с истински жени.
+      </div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-item reveal">
+        <div class="yr">2011</div>
+        <h3 data-i18n-bg="Първото огледало" data-i18n-en="The first mirror">Първото огледало</h3>
+        <p data-i18n-bg="Завършвам академията по фризьорство и грим в София. Първи стол в локален салон, първи невести, първа отговорност." data-i18n-en="Graduated the Sofia academy of hairdressing and makeup. First chair in a local salon, first brides, first responsibility.">Завършвам академията по фризьорство и грим в София. Първи стол в локален салон, първи невести, първа отговорност.</p>
+      </div>
+      <div class="tl-item reveal" style="--d:120ms;">
+        <div class="yr">2015</div>
+        <h3 data-i18n-bg="Сертификации в Атина и Милано" data-i18n-en="Certifications in Athens and Milan">Сертификации в Атина и Милано</h3>
+        <p data-i18n-bg="Специализация по медицинска естетика, лазерна епилация и RF протоколи. Първият път, в който видях резултат, който не зависи от продукта." data-i18n-en="A specialisation in medical aesthetics, laser epilation and RF protocols. The first time I saw a result that didn't depend on the product.">Специализация по медицинска естетика, лазерна епилация и RF протоколи. Първият път, в който видях резултат, който не зависи от продукта.</p>
+      </div>
+      <div class="tl-item reveal" style="--d:240ms;">
+        <div class="yr">2019</div>
+        <h3 data-i18n-bg="Първа клиентска книга" data-i18n-en="The first client book">Първа клиентска книга</h3>
+        <p data-i18n-bg="200+ постоянни клиентки, които ме следват от салон в салон. Тогава за пръв път се замислих за собствен дом — собствено студио." data-i18n-en="200+ recurring clients, following me from chair to chair. That was the first time I imagined a home of my own — my own studio.">200+ постоянни клиентки, които ме следват от салон в салон. Тогава за пръв път се замислих за собствен дом — собствено студио.</p>
+      </div>
+      <div class="tl-item reveal" style="--d:360ms;">
+        <div class="yr">2024</div>
+        <h3 data-i18n-bg="La Bella Senti отваря врати" data-i18n-en="La Bella Senti opens its doors">La Bella Senti отваря врати</h3>
+        <p data-i18n-bg="ул. „Златни врата“ 17. Девет ритуала, едно огледало в златна рамка, един принцип — тих лукс. Това място говори вместо мен." data-i18n-en="ul. Zlatni Vrata 17. Nine rituals, one mirror in a golden frame, one principle — quiet luxury. This place speaks for me.">ул. „Златни врата“ 17. Девет ритуала, едно огледало в златна рамка, един принцип — тих лукс. Това място говори вместо мен.</p>
+      </div>
+      <div class="tl-item reveal" style="--d:480ms;">
+        <div class="yr">2026</div>
+        <h3 data-i18n-bg="Senti · Or — членство" data-i18n-en="Senti · Or — membership">Senti · Or — членство</h3>
+        <p data-i18n-bg="Първото частно членство в студиото. Затворен кръг от жени, които превръщат красотата в постоянство." data-i18n-en="The studio's first private membership. A closed circle of women who turn beauty into a constant.">Първото частно членство в студиото. Затворен кръг от жени, които превръщат красотата в постоянство.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / SERVICE APPROACH -->
+<section class="section" data-screen-label="Trust">
+  <div class="wrap">
+    <div class="trust">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:18px;"><span style="color:var(--gold);">III.</span> &nbsp; <span data-i18n-bg="Как работя" data-i18n-en="How I work">Как работя</span></div>
+        <h2 class="display" style="margin-bottom:30px;"><span data-i18n-bg="Обещание" data-i18n-en="The promise">Обещание</span><br/><span class="italic gold" data-i18n-bg="на студиото." data-i18n-en="of the studio.">на студиото.</span></h2>
+        <p data-i18n-bg="Това не е списък. Това са шестте обещания, с които работя всеки ден — за всяка клиентка, която прекрачва прага на студиото." data-i18n-en="This isn't a list. These are the six promises I work with every day — for every client who crosses the studio's threshold.">
+          Това не е списък. Това са шестте обещания, с които работя всеки ден — за всяка клиентка, която прекрачва прага на студиото.
+        </p>
+        <a href="services.html" class="btn ghost" style="margin-top:30px;" data-i18n-bg="Виж услугите" data-i18n-en="Explore services">Виж услугите <span class="arrow">→</span></a>
+      </div>
+
+      <div class="trust-list reveal" style="--d:160ms;">
+        <div class="row">
+          <div class="ic">I</div>
+          <div>
+            <h4 data-i18n-bg="Диагностика преди процедура" data-i18n-en="Diagnosis before procedure">Диагностика преди процедура</h4>
+            <p data-i18n-bg="Никога не започвам без подробна консултация и оценка на кожата." data-i18n-en="I never begin without a detailed consultation and skin assessment.">Никога не започвам без подробна консултация и оценка на кожата.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ic">II</div>
+          <div>
+            <h4 data-i18n-bg="Един клиент в студиото" data-i18n-en="One client in the studio">Един клиент в студиото</h4>
+            <p data-i18n-bg="По време на твоята сесия в стаята си само ти. Без бързане, без шум." data-i18n-en="During your session you are the only one in the room. No rush, no noise.">По време на твоята сесия в стаята си само ти. Без бързане, без шум.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ic">III</div>
+          <div>
+            <h4 data-i18n-bg="Сертифицирана техника" data-i18n-en="Certified equipment">Сертифицирана техника</h4>
+            <p data-i18n-bg="Лазер с CE и FDA сертификати, единични игли, медицински grade консумативи." data-i18n-en="CE- and FDA-certified laser, single-use needles, medical-grade consumables.">Лазер с CE и FDA сертификати, единични игли, медицински grade консумативи.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ic">IV</div>
+          <div>
+            <h4 data-i18n-bg="Протокол след процедура" data-i18n-en="Aftercare protocol">Протокол след процедура</h4>
+            <p data-i18n-bg="Получаваш писмен протокол за вкъщи. Връзката между нас не свършва на вратата." data-i18n-en="You receive a written protocol for home. Our connection doesn't end at the door.">Получаваш писмен протокол за вкъщи. Връзката между нас не свършва на вратата.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ic">V</div>
+          <div>
+            <h4 data-i18n-bg="Без излишни препоръки" data-i18n-en="No upselling">Без излишни препоръки</h4>
+            <p data-i18n-bg="Препоръчвам ти само това, което ще работи за теб. Никога — заради ценоразписа." data-i18n-en="I only recommend what will work for you. Never for the price list.">Препоръчвам ти само това, което ще работи за теб. Никога — заради ценоразписа.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ic">VI</div>
+          <div>
+            <h4 data-i18n-bg="Дискретност · винаги" data-i18n-en="Always discreet">Дискретност · винаги</h4>
+            <p data-i18n-bg="Всичко, което се случва между мен и теб, остава между нас." data-i18n-en="Everything that happens between us stays between us.">Всичко, което се случва между мен и теб, остава между нас.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing" data-screen-label="Closing">
+  <div class="eyebrow reveal" data-i18n-bg="С нетърпение, до скоро" data-i18n-en="With anticipation, see you soon">С нетърпение, до скоро</div>
+  <h2 class="display reveal" style="--d:120ms;margin-top:24px;"><span data-i18n-bg="До среща в" data-i18n-en="See you at">До среща в</span><br/><span class="italic gold" data-i18n-bg="студиото." data-i18n-en="the studio.">студиото.</span></h2>
+  <div class="sig reveal" style="--d:300ms;">Andjelina</div>
+  <div class="reveal" style="--d:420ms;margin-top:50px;display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+    <a href="contact.html" class="btn gold" data-i18n-bg="Резервирай среща" data-i18n-en="Book a visit">Резервирай среща <span class="arrow">→</span></a>
+    <a target="_blank" href="https://www.instagram.com/la_bella_senti_beauty_studio/" class="btn ghost" data-i18n-bg="Последвай в Instagram" data-i18n-en="Follow on Instagram">Последвай в Instagram <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+<script>
+  (function(){
+    const trigger = () => setTimeout(() => window.print(), 500);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(trigger);
+    } else {
+      window.addEventListener('load', trigger);
+    }
+  })();
+</script>
+</body>
+</html>
