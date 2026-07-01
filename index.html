@@ -99,7 +99,7 @@
   }
   .marquee-track{display:flex;gap:60px;width:max-content;animation:marquee 50s linear infinite;}
   .marquee-track > span{display:inline-flex;align-items:center;gap:60px;font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;color:var(--ink-mute);letter-spacing:.04em;white-space:nowrap;}
-  .marquee-track .dot{color:var(--gold);font-style:normal;}
+  .marquee-track .dot{color:#a91dd5b5;font-style:normal;}
   @keyframes marquee{to{transform:translateX(-50%);}}
 
   /* floating ornaments */
@@ -324,9 +324,9 @@
 
   <!-- ornament: gold thin vertical line w/ label -->
   <div class="ornament left">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
-      <span style="writing-mode:vertical-rl;transform:rotate(180deg);color:var(--ink-dim);letter-spacing:.4em;text-transform:uppercase;font-size:10px;">EST · MMXXIV · SOFIA</span>
-      <span style="width:1px;height:140px;background:linear-gradient(180deg,transparent,var(--gold),transparent);"></span>
+    <div class="sidebar-col">
+      <span class="sidebar-label">EST · MMXXIV · SOFIA</span>
+      <span class="sidebar-line"></span>
     </div>
   </div>
 
@@ -335,27 +335,27 @@
       <div class="eyebrow reveal" data-i18n-bg="Бутиково студио · София · Стрелбище" data-i18n-en="Boutique Studio · Sofia · Strelbishte">
         Бутиково студио<span class="dot"></span>София<span class="dot"></span>Стрелбище
       </div>
-      <h1 class="reveal" style="--d:120ms;">
+      <h1 class="reveal d-120">
         <span data-i18n-bg="Изкуството" data-i18n-en="The Art of">Изкуството</span><br/>
         <span class="italic" data-i18n-bg="на красотата" data-i18n-en="Refined Beauty">на красотата</span><br/>
         <span class="small-cap" data-i18n-bg="изваяна с прецизност." data-i18n-en="sculpted with precision.">изваяна с прецизност.</span>
       </h1>
-      <p class="lead reveal" style="--d:280ms;" data-i18n-bg="Авторски ритуали за лице, тяло и коса в интимна атмосфера. La Bella Senti е място, където професионализмът среща тихия лукс — за жени, които оценяват детайла." data-i18n-en="Signature face, body, and hair rituals in an intimate atmosphere. La Bella Senti is where professionalism meets quiet luxury — for women who notice the detail.">
+      <p class="lead reveal d-280" data-i18n-bg="Авторски ритуали за лице, тяло и коса в интимна атмосфера. La Bella Senti е място, където професионализмът среща тихия лукс — за жени, които оценяват детайла." data-i18n-en="Signature face, body, and hair rituals in an intimate atmosphere. La Bella Senti is where professionalism meets quiet luxury — for women who notice the detail.">
         Авторски ритуали за лице, тяло и коса в интимна атмосфера. La Bella Senti е място, където професионализмът среща тихия лукс — за жени, които оценяват детайла.
       </p>
-      <div class="hero-ctas reveal" style="--d:440ms;">
+      <div class="hero-ctas reveal d-440">
         <a class="btn gold" href="contact.html" data-i18n-bg="Резервирай час" data-i18n-en="Book Appointment">Резервирай час <span class="arrow">→</span></a>
         <a class="btn ghost" href="services.html" data-i18n-bg="Виж услугите" data-i18n-en="Explore Services">Виж услугите <span class="arrow">→</span></a>
       </div>
-      <div class="hero-meta reveal" style="--d:600ms;">
+      <div class="hero-meta reveal d-600">
         <span class="star">★★★★★</span>
         <span data-i18n-bg="450+ доволни клиенти" data-i18n-en="450+ devoted clients">450+ доволни клиенти</span>
-        <span style="width:24px;height:1px;background:var(--line-strong);"></span>
-        <a target="_blank" href="https://www.instagram.com/la_bella_senti_beauty_studio/" style="color:var(--gold);text-decoration:none;letter-spacing:.3em;">@la_bella_senti</a>
+        <span class="meta-rule"></span>
+        <a target="_blank" href="https://www.instagram.com/la_bella_senti_beauty_studio/" class="link-gold">@la_bella_senti</a>
       </div>
     </div>
 
-    <div class="hero-art reveal" style="--d:200ms;">
+    <div class="hero-art reveal d-200">
       <div class="portrait-wrap">
         <div class="portrait"></div>
         <span class="portrait-tag" data-i18n-bg="Анджелина Милчева · Основател" data-i18n-en="Andjelina Milcheva · Founder">Анджелина Милчева · Основател</span>
@@ -407,7 +407,7 @@
   <div class="wrap">
     <div class="sect-head reveal">
       <div>
-        <div class="kicker"><span style="color:var(--gold);">I.</span> &nbsp; <span data-i18n-bg="Колекция услуги" data-i18n-en="The Collection">Колекция услуги</span></div>
+        <div class="kicker"><span class="text-gold">I.</span> &nbsp; <span data-i18n-bg="Колекция услуги" data-i18n-en="The Collection">Колекция услуги</span></div>
         <h2 class="display"><span data-i18n-bg="Деветте" data-i18n-en="Nine">Деветте</span><br/><span class="italic gold" data-i18n-bg="ритуала" data-i18n-en="signature rituals.">ритуала</span><span data-i18n-bg="." data-i18n-en="">.</span></h2>
       </div>
       <div class="right" data-i18n-bg="От прецизна лазерна епилация до радиочестотен лифтинг и авторски процедури за лице — всяка услуга е изградена около твоята кожа, твоя ритъм и твоя резултат." data-i18n-en="From precision laser epilation to radiofrequency lifting and signature facial work — each service is built around your skin, your rhythm, your result.">
@@ -415,7 +415,7 @@
       </div>
     </div>
 
-    <div class="bento reveal" style="--d:120ms;">
+    <div class="bento reveal d-120">
       <a class="cat c-laser bg-laser" href="services.html#laser">
         <div class="inside">
           <div class="top">
@@ -440,7 +440,7 @@
           </div>
           <div>
             <h3><span data-i18n-bg="Стягащи" data-i18n-en="Firming">Стягащи</span> <span class="it" data-i18n-bg="терапии" data-i18n-en="therapies">терапии</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Скулптурираща грижа за тяло." data-i18n-en="Sculpting body care.">Скулптурираща грижа за тяло.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Скулптурираща грижа за тяло." data-i18n-en="Sculpting body care.">Скулптурираща грижа за тяло.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -450,7 +450,7 @@
           <div class="top"><span class="tag" data-i18n-bg="Технология" data-i18n-en="Technology">Технология</span><span class="idx">03</span></div>
           <div>
             <h3><span data-i18n-bg="RF" data-i18n-en="RF">RF</span> <span class="it" data-i18n-bg="лифтинг" data-i18n-en="lifting">лифтинг</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Невидим лифт. Видим резултат." data-i18n-en="Invisible lift. Visible result.">Невидим лифт. Видим резултат.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Невидим лифт. Видим резултат." data-i18n-en="Invisible lift. Visible result.">Невидим лифт. Видим резултат.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -470,7 +470,7 @@
           <div class="top"><span class="tag" data-i18n-bg="Коса" data-i18n-en="Hair">Коса</span><span class="idx">05</span></div>
           <div>
             <h3><span data-i18n-bg="Фризьорство" data-i18n-en="Hairdressing">Фризьорство</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Авторски подстригвания и оформяне." data-i18n-en="Signature cuts and styling.">Авторски подстригвания и оформяне.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Авторски подстригвания и оформяне." data-i18n-en="Signature cuts and styling.">Авторски подстригвания и оформяне.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -480,7 +480,7 @@
           <div class="top"><span class="tag" data-i18n-bg="Цвят" data-i18n-en="Colour">Цвят</span><span class="idx">06</span></div>
           <div>
             <h3><span data-i18n-bg="Боядисване" data-i18n-en="Hair">Боядисване</span> <span class="it" data-i18n-bg="на коса" data-i18n-en="coloring">на коса</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Балаяж, шатуш, премиум брандове." data-i18n-en="Balayage, shatush, premium brands.">Балаяж, шатуш, премиум брандове.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Балаяж, шатуш, премиум брандове." data-i18n-en="Balayage, shatush, premium brands.">Балаяж, шатуш, премиум брандове.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -490,7 +490,7 @@
           <div class="top"><span class="tag" data-i18n-bg="Възстановяване" data-i18n-en="Restoration">Възстановяване</span><span class="idx">07</span></div>
           <div>
             <h3><span data-i18n-bg="Терапии" data-i18n-en="Hair">Терапии</span> <span class="it" data-i18n-bg="за коса" data-i18n-en="treatments">за коса</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Ботокс, кератин, нано-възстановяване." data-i18n-en="Botox, keratin, nano-repair.">Ботокс, кератин, нано-възстановяване.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Ботокс, кератин, нано-възстановяване." data-i18n-en="Botox, keratin, nano-repair.">Ботокс, кератин, нано-възстановяване.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -500,7 +500,7 @@
           <div class="top"><span class="tag" data-i18n-bg="Ръце · Крака" data-i18n-en="Hands · Feet">Ръце · Крака</span><span class="idx">08</span></div>
           <div>
             <h3><span data-i18n-bg="Маникюр" data-i18n-en="Manicure">Маникюр</span> <span class="it" data-i18n-bg="& педикюр" data-i18n-en="& pedicure">& педикюр</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Класически, японски, гел-лак." data-i18n-en="Classic, Japanese, gel polish.">Класически, японски, гел-лак.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Класически, японски, гел-лак." data-i18n-en="Classic, Japanese, gel polish.">Класически, японски, гел-лак.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -510,7 +510,7 @@
           <div class="top"><span class="tag" data-i18n-bg="Финал" data-i18n-en="Finish">Финал</span><span class="idx">09</span></div>
           <div>
             <h3><span class="it" data-i18n-bg="Грим" data-i18n-en="Makeup">Грим</span></h3>
-            <div class="bot" style="margin-top:10px;"><span data-i18n-bg="Дневен · вечерен · сватбен." data-i18n-en="Day · evening · bridal.">Дневен · вечерен · сватбен.</span><span class="arr">↗</span></div>
+            <div class="bot bot-mt"><span data-i18n-bg="Дневен · вечерен · сватбен." data-i18n-en="Day · evening · bridal.">Дневен · вечерен · сватбен.</span><span class="arr">↗</span></div>
           </div>
         </div>
       </a>
@@ -519,11 +519,11 @@
 </section>
 
 <!-- ============ PACKAGES ============ -->
-<section class="section tight" data-screen-label="Packages" id="packages" style="background:linear-gradient(180deg,transparent, rgba(201,169,106,.04), transparent);">
+<section class="section tight bg-gold-wash" data-screen-label="Packages" id="packages">
   <div class="wrap">
     <div class="sect-head reveal">
       <div>
-        <div class="kicker"><span style="color:var(--gold);">II.</span> &nbsp; <span data-i18n-bg="Куриран лукс" data-i18n-en="Curated Luxury">Куриран лукс</span></div>
+        <div class="kicker"><span class="text-gold">II.</span> &nbsp; <span data-i18n-bg="Куриран лукс" data-i18n-en="Curated Luxury">Куриран лукс</span></div>
         <h2 class="display"><span data-i18n-bg="Авторски" data-i18n-en="Signature">Авторски</span> <span class="italic gold" data-i18n-bg="пакети." data-i18n-en="packages.">пакети.</span></h2>
       </div>
       <div class="right" data-i18n-bg="Преживявания, събрани в безшевно цяло — за невести, специални вечери и поводи, които заслужават собствен ритуал." data-i18n-en="Experiences composed into a seamless whole — for brides, special evenings, and occasions that deserve their own ritual.">
@@ -536,7 +536,7 @@
       <article class="pkg reveal">
         <div class="ribbon" data-i18n-bg="Сигнатура" data-i18n-en="Signature">Сигнатура</div>
         <div class="pkg-img">
-          <div class="imgph" style="background:radial-gradient(ellipse at 30% 30%,rgba(255,200,200,.35),transparent 60%),linear-gradient(160deg,#F2DCDF,#E8D5EC);">[ BRIDAL · 06H ]</div>
+          <div class="imgph imgph-bridal">[ BRIDAL · 06H ]</div>
         </div>
         <div class="pkg-body">
           <div class="meta"><span data-i18n-bg="Сватбен ден" data-i18n-en="Wedding day">Сватбен ден</span><span>06h · 4 services</span></div>
@@ -552,10 +552,10 @@
         </div>
       </article>
 
-      <article class="pkg reveal" style="--d:120ms;">
-        <div class="ribbon" style="background:linear-gradient(135deg,#A07A38,#E4CB8E);" data-i18n-bg="Събитие" data-i18n-en="Event">Събитие</div>
+      <article class="pkg reveal d-120">
+        <div class="ribbon ribbon-event" data-i18n-bg="Събитие" data-i18n-en="Event">Събитие</div>
         <div class="pkg-img">
-          <div class="imgph" style="background:radial-gradient(ellipse at 50% 30%,rgba(228,203,142,.45),transparent 60%),linear-gradient(160deg,#F2E1B8,#EAD7E8);">[ HAIR + MAKEUP ]</div>
+          <div class="imgph imgph-event">[ HAIR + MAKEUP ]</div>
         </div>
         <div class="pkg-body">
           <div class="meta"><span data-i18n-bg="Премиум вечер" data-i18n-en="Premium evening">Премиум вечер</span><span>02h · 2 services</span></div>
@@ -571,10 +571,10 @@
         </div>
       </article>
 
-      <article class="pkg reveal" style="--d:240ms;">
+      <article class="pkg reveal d-240">
         <div class="ribbon" data-i18n-bg="Сезон" data-i18n-en="Seasonal">Сезон</div>
         <div class="pkg-img">
-          <div class="imgph" style="background:radial-gradient(ellipse at 70% 30%,rgba(228,203,142,.4),transparent 60%),linear-gradient(160deg,#ECD8EE,#F2E1B8);">[ GLOW · UP ]</div>
+          <div class="imgph imgph-glow">[ GLOW · UP ]</div>
         </div>
         <div class="pkg-body">
           <div class="meta"><span data-i18n-bg="Сезонен глоу-ъп" data-i18n-en="Seasonal glow-up">Сезонен глоу-ъп</span><span>03h · 3 services</span></div>
@@ -591,9 +591,9 @@
       </article>
 
       <article class="pkg reveal">
-        <div class="ribbon" style="background:linear-gradient(135deg,#7A5B2C,#C9A96A);" data-i18n-bg="Курс" data-i18n-en="Course">Курс</div>
+        <div class="ribbon ribbon-course" data-i18n-bg="Курс" data-i18n-en="Course">Курс</div>
         <div class="pkg-img">
-          <div class="imgph" style="background:radial-gradient(ellipse at 40% 40%,rgba(201,169,106,.5),transparent 60%),linear-gradient(160deg,#F4E2B4,#EBD3D6);">[ LASER · 6 ]</div>
+          <div class="imgph imgph-laser">[ LASER · 6 ]</div>
         </div>
         <div class="pkg-body">
           <div class="meta"><span data-i18n-bg="Курс от 6 процедури" data-i18n-en="Course of 6">Курс от 6 процедури</span><span>−20%</span></div>
@@ -609,10 +609,10 @@
         </div>
       </article>
 
-      <article class="pkg reveal" style="--d:120ms;">
+      <article class="pkg reveal d-120">
         <div class="ribbon" data-i18n-bg="Първо посещение" data-i18n-en="First visit">Първо посещение</div>
         <div class="pkg-img">
-          <div class="imgph" style="background:radial-gradient(ellipse at 50% 50%,rgba(228,203,142,.4),transparent 60%),linear-gradient(160deg,#EDDEC2,#E2CFE6);">[ INTRO · −15% ]</div>
+          <div class="imgph imgph-intro">[ INTRO · −15% ]</div>
         </div>
         <div class="pkg-body">
           <div class="meta"><span data-i18n-bg="Запознанство" data-i18n-en="Welcome ritual">Запознанство</span><span>−15%</span></div>
@@ -628,10 +628,10 @@
         </div>
       </article>
 
-      <article class="pkg reveal" style="--d:240ms;">
-        <div class="ribbon" style="background:linear-gradient(135deg,#A07A38,#FFF3CF,#A07A38);" data-i18n-bg="Подарък" data-i18n-en="Gift">Подарък</div>
+      <article class="pkg reveal d-240">
+        <div class="ribbon ribbon-gift" data-i18n-bg="Подарък" data-i18n-en="Gift">Подарък</div>
         <div class="pkg-img">
-          <div class="imgph" style="background:radial-gradient(ellipse at 50% 30%,rgba(228,203,142,.5),transparent 60%),linear-gradient(160deg,#F2E1B8,#E5D2E8);">[ GIFT · CARD ]</div>
+          <div class="imgph imgph-gift">[ GIFT · CARD ]</div>
         </div>
         <div class="pkg-body">
           <div class="meta"><span data-i18n-bg="Подаръчна карта" data-i18n-en="Gift card">Подаръчна карта</span><span data-i18n-bg="на твоя стойност" data-i18n-en="any amount">на твоя стойност</span></div>
@@ -640,7 +640,7 @@
             Луксозна подаръчна карта в собствена кутия — за рождени дни, годишнини и поводи без повод.
           </p>
           <div class="price-row">
-            <span class="price-eur" style="font-size:24px;letter-spacing:.1em;" data-i18n-bg="€ 50 — 500" data-i18n-en="€ 50 — 500">€ 50 — 500</span>
+            <span class="price-eur price-eur-range" data-i18n-bg="€ 50 — 500" data-i18n-en="€ 50 — 500">€ 50 — 500</span>
             <span class="price-bgn">/ 97 — 977 BGN</span>
           </div>
           <a class="pkg-cta" href="contact.html"><span data-i18n-bg="Поръчай карта" data-i18n-en="Order a card">Поръчай карта</span><span class="ar">→</span></a>
@@ -656,7 +656,7 @@
   <div class="wrap">
     <div class="sect-head reveal">
       <div>
-        <div class="kicker"><span style="color:var(--gold);">III.</span> &nbsp; <span data-i18n-bg="Бележки от студиото" data-i18n-en="Notes from the studio">Бележки от студиото</span></div>
+        <div class="kicker"><span class="text-gold">III.</span> &nbsp; <span data-i18n-bg="Бележки от студиото" data-i18n-en="Notes from the studio">Бележки от студиото</span></div>
         <h2 class="display"><span data-i18n-bg="Дневник" data-i18n-en="The Beauty">Дневник</span><br/><span class="italic gold" data-i18n-bg="на красотата." data-i18n-en="diary.">на красотата.</span></h2>
       </div>
       <div class="right" data-i18n-bg="Експертна гледна точка от Анджелина — за грижа, която работи между визитите в студиото." data-i18n-en="An expert point of view from Andjelina — for the care that works between studio visits.">
@@ -671,7 +671,7 @@
           <span class="sig">A. Milcheva</span>
         </div>
       </div>
-      <div class="reveal" style="--d:160ms;">
+      <div class="reveal d-160">
         <p class="ed-pull" data-i18n-bg="„Кожата не се променя с продукт, тя се променя с навик. Започни с по-малко — но направи го всеки ден, с внимание.“" data-i18n-en="“Skin doesn't change with a product — it changes with a habit. Begin with less, but do it daily, and with intention.”">
           „Кожата не се променя с продукт, тя се променя с навик. Започни с по-малко — но направи го всеки ден, с внимание.“
         </p>
@@ -711,11 +711,11 @@
 </section>
 
 <!-- ============ TESTIMONIALS ============ -->
-<section class="section tight" data-screen-label="Testimonials" id="testimonials" style="background:linear-gradient(180deg,transparent, rgba(201,169,106,.04), transparent);">
+<section class="section tight bg-gold-wash" data-screen-label="Testimonials" id="testimonials">
   <div class="wrap">
     <div class="sect-head reveal">
       <div>
-        <div class="kicker"><span style="color:var(--gold);">IV.</span> &nbsp; <span data-i18n-bg="Думи на доверие" data-i18n-en="Words of trust">Думи на доверие</span></div>
+        <div class="kicker"><span class="text-gold">IV.</span> &nbsp; <span data-i18n-bg="Думи на доверие" data-i18n-en="Words of trust">Думи на доверие</span></div>
         <h2 class="display"><span data-i18n-bg="450+" data-i18n-en="450+">450+</span> <span class="italic gold" data-i18n-bg="отзива." data-i18n-en="reviews.">отзива.</span></h2>
       </div>
       <div class="right" data-i18n-bg="Една и съща опитност — отново и отново, изречена с собствен глас." data-i18n-en="The same experience — described again and again, in each client's own voice.">
@@ -738,7 +738,7 @@
             </div>
           </div>
         </div>
-        <div class="test reveal" style="--d:120ms;">
+        <div class="test reveal d-120">
           <div class="stars">★★★★★</div>
           <p class="q" data-i18n-bg="„Лазерната епилация при Анджи беше единствената, която наистина работи за моя тип кожа. Третата сесия — без думи.“" data-i18n-en="“Andjelina's laser epilation was the first that truly worked on my skin type. After three sessions — speechless.”">
             „Лазерната епилация при Анджи беше единствената, която наистина работи за моя тип кожа. Третата сесия — без думи.“
@@ -751,7 +751,7 @@
             </div>
           </div>
         </div>
-        <div class="test reveal" style="--d:240ms;">
+        <div class="test reveal d-240">
           <div class="stars">★★★★★</div>
           <p class="q" data-i18n-bg="„Беше деня на сватбата ми. Излязох от студиото и младоженецът каза само едно изречение. Това е достатъчно.“" data-i18n-en="“It was my wedding day. I walked out of the studio and my husband only said one sentence. That was enough.”">
             „Беше деня на сватбата ми. Излязох от студиото и младоженецът каза само едно изречение. Това е достатъчно.“
@@ -774,10 +774,10 @@
   <div class="wrap">
     <div class="sect-head reveal">
       <div>
-        <div class="kicker"><span style="color:var(--gold);">V.</span> &nbsp; <span data-i18n-bg="Студиото в кадри" data-i18n-en="Through the lens">Студиото в кадри</span></div>
+        <div class="kicker"><span class="text-gold">V.</span> &nbsp; <span data-i18n-bg="Студиото в кадри" data-i18n-en="Through the lens">Студиото в кадри</span></div>
         <h2 class="display">@<span class="italic gold">la_bella_senti</span></h2>
       </div>
-      <div class="right" style="display:flex;align-items:end;justify-content:flex-end;">
+      <div class="right flex-end-bottom">
         <a target="_blank" href="https://www.instagram.com/la_bella_senti_beauty_studio/" class="btn ghost" data-i18n-bg="Последвай" data-i18n-en="Follow">Последвай <span class="arrow">→</span></a>
       </div>
     </div>
@@ -800,7 +800,7 @@
   <div class="wrap vip-stage">
     <div class="sect-head reveal">
       <div>
-        <div class="kicker"><span style="color:var(--gold);">VI.</span> &nbsp; <span data-i18n-bg="Тих лукс" data-i18n-en="Quiet luxury">Тих лукс</span></div>
+        <div class="kicker"><span class="text-gold">VI.</span> &nbsp; <span data-i18n-bg="Тих лукс" data-i18n-en="Quiet luxury">Тих лукс</span></div>
         <h2 class="display"><span data-i18n-bg="Senti" data-i18n-en="Senti">Senti</span> <span class="italic gold" data-i18n-bg="членство." data-i18n-en="Membership.">членство.</span></h2>
       </div>
       <div class="right" data-i18n-bg="За клиентките, които превръщат красотата в постоянство. Дискретна привилегия — за теб и за един човек по твой избор." data-i18n-en="For clients who turn beauty into a habit. A discreet privilege — for you and one guest of your choice.">
@@ -811,19 +811,19 @@
     <div class="vip-grid">
       <div class="reveal">
         <div class="vip-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="card-row-between">
             <div>
-              <div style="font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px;">La Bella Senti</div>
+              <div class="vip-label-micro">La Bella Senti</div>
               <div class="vip-tier">Senti · Or</div>
             </div>
-            <div style="font-family:'Pinyon Script',cursive;color:var(--gold);font-size:54px;line-height:1;">B</div>
+            <div class="vip-monogram">B</div>
           </div>
           <div>
             <div class="vip-num">5817 · 0001 · MMXXVI</div>
             <div class="vip-row" style="margin-top:14px;">
               <div>
                 <div data-i18n-bg="Член" data-i18n-en="Member">Член</div>
-                <div class="vip-name" style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;letter-spacing:0;text-transform:none;margin-top:4px;">Madame · Bella</div>
+                <div class="vip-name vip-name-serif">Madame · Bella</div>
               </div>
               <div style="text-align:right;">
                 <div data-i18n-bg="Валидност" data-i18n-en="Valid thru">Валидност</div>
@@ -834,7 +834,7 @@
         </div>
       </div>
 
-      <div class="vip-perks reveal" style="--d:160ms;">
+      <div class="vip-perks reveal d-160">
         <div class="perk">
           <span class="num">01</span>
           <div>
