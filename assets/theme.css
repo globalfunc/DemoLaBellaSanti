@@ -1,7 +1,7 @@
 /* La Bella Senti — Lavender Purple + Champagne theme (light) */
 :root{
   /* Surfaces — soft champagne washed with lavender */
-  --bg:#F5ECDD;          /* primary page — warm champagne */
+  --bg:#ffefde;          /* primary page — warm champagne */
   --bg-2:#EFE2EE;        /* lavender mist surface */
   --bg-3:#E7D7E6;        /* deeper lavender card surface */
   --bg-champagne:#F0E3CD;/* champagne card surface */
@@ -270,7 +270,7 @@ footer.lbs::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
    · index.html — #testimonials ("Words of Trust")
    · about.html — Timeline section (opacity .03 inline; visually interchangeable) */
 .bg-gold-wash {
-  background: linear-gradient(180deg, transparent, rgba(201,169,106,.04), transparent);
+  background: linear-gradient(180deg, transparent, rgb(207 176 63 / 49%), transparent);
 }
 
 /* --- Flat gold text colour (solid, not the gradient clip effect of .gold) ---
